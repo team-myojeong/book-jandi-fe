@@ -16,6 +16,10 @@
   }
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,10 +28,69 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-size: 1.6rem;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/** Text style */
+
+.title1 {
+  font-family: var(--font-pretendard);
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  font-weight: 600;
+}
+
+.title2 {
+  font-family: var(--font-pretendard);
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  font-weight: 600;
+}
+
+.body1 {
+  font-family: var(--font-pretendard);
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  font-weight: 400;
+}
+
+.body1-emphasis {
+  font-family: var(--font-pretendard);
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+}
+
+.body2 {
+  font-family: var(--font-pretendard);
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-weight: 500;
+}
+
+.body2-emphasis {
+  font-family: var(--font-pretendard);
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-weight: 700;
+}
+
+.body2-light {
+  font-family: var(--font-pretendard);
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-weight: 400;
+}
+
+.caption {
+  font-family: var(--font-pretendard);
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+  font-weight: 400;
 }
