@@ -5,5 +5,10 @@
 ## Getting Started
 
 ```bash
-yarn dev
+git clone https://github.com/team-myojeong/book-jandi-fe.git
+```
+
+```bash
+npm install
+npm run dev
 ```
