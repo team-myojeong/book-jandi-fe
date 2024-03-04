@@ -52,6 +52,9 @@ const config: Config = {
           900: "#422C0F",
         },
       },
+      height: {
+        15: "3.75rem",
+      },
     },
   },
   plugins: [],
