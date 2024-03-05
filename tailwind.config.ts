@@ -53,6 +53,7 @@ const config: Config = {
         },
       },
       height: {
+        9.5: "2.125rem",
         15: "3.75rem",
       },
     },
