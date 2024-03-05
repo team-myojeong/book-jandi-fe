@@ -32,8 +32,6 @@ body {
 
 /** Text style */
 
-/* TODO rem to pixel */
-
 .title1 {
   font-family: var(--font-pretendard);
   font-size: 1.5rem;
