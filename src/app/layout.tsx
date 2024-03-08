@@ -4,6 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "북잔디 | 개발자 도서 평점 서비스",
+  icons: [{ rel: "icon", url: "/metadata/favicon.ico" }],
 };
 
 export default function RootLayout({
