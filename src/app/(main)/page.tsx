@@ -1,9 +1,10 @@
-import { Icon } from "@/components/Icon";
+"use client";
+import { Header } from "@/components/layout/Header";
 
 export default function Main() {
   return (
-    <div>
-      <Icon name="comment" alt="alarm" />
-    </div>
+    <>
+      <Header />
+    </>
   );
 }

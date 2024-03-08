@@ -12,7 +12,7 @@ export function HeaderWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Header({ isLogin = false }: { isLogin: boolean }) {
+export function Header({ isLogin = false }: { isLogin?: boolean }) {
   return (
     <HeaderWrapper>
       <div className="flex">
@@ -29,7 +29,7 @@ export function Header({ isLogin = false }: { isLogin: boolean }) {
           alt="search-button"
           onClick={() => console.log("검색")}
         />
-        {isLogin ? (
+        {!isLogin ? (
           <div className="h-9.5">
             <Button
               color="green"
