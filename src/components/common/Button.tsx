@@ -15,8 +15,6 @@ const CSS_CONFIG = {
   },
 };
 
-const CSS_DISABLED_CONFIG = {};
-
 export default function Button({
   color,
   type,

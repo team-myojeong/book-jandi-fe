@@ -1,3 +1,4 @@
+"use client";
 import { IconType } from "@/components/common/Icon";
 import LogoButton from "@/components/common/LogoButton";
 import IconButton from "@/components/common/IconButton";
@@ -51,7 +52,7 @@ export function HeaderWithSingleArrow({
   onClickLeftArrow,
 }: {
   title: string;
-  onClickLeftArrow: () => void;
+  onClickLeftArrow?: () => void;
 }) {
   return (
     <HeaderWrapper>
