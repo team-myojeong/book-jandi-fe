@@ -42,6 +42,7 @@ export default function Button({
   onClick,
   text,
   textStyle = "body2",
+  isDisabled = false,
 }: {
   color: "green" | "grey" | "yellow";
   type?: "primary" | "secondary";
@@ -49,10 +50,11 @@ export default function Button({
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
   textStyle?: TextStyle;
+  isDisabled?: boolean;
 }) {
   return (
     <button
-      disabled={state === "disabled"}
+      disabled={isDisabled}
       className={`rounded-lg w-full h-full ${CSS_CONFIG[color][type][state]} ${textStyle}`}
       onClick={onClick}
     >
