@@ -1,3 +1,4 @@
+"use client";
 import { IconType } from "@/components/common/Icon";
 import LogoButton from "@/components/common/LogoButton";
 import IconButton from "@/components/common/IconButton";
@@ -6,7 +7,7 @@ import Avatar from "@/components/common/Avatar";
 
 export function HeaderWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <header className="h-15 z-10 px-4 flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 h-15 z-10 px-4 flex justify-between items-center bg-white">
       {children}
     </header>
   );
@@ -33,7 +34,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
           <div className="h-9.5">
             <Button
               color="green"
-              type="default"
+              state="default"
               text="회원가입/로그인"
               onClick={() => console.log("회원가입/로그인 버튼")}
             />
