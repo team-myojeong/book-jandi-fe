@@ -46,7 +46,7 @@ export default async function WeeklyPopularPollList() {
   return (
     <>
       <Title text="이번 주의 인기 투표" />
-      <div className="overflow-auto whitespace-nowrap">
+      <div className="overflow-auto whitespace-nowrap mt-4">
         {fetchedPollList &&
           fetchedPollList.map((ele) => {
             const {
@@ -56,7 +56,6 @@ export default async function WeeklyPopularPollList() {
               optionCount,
               publisher,
               title,
-              translatorList,
               voteCount,
               votePercentage,
             } = ele;
