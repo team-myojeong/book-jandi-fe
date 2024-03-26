@@ -7,7 +7,7 @@ import Avatar from "@/components/common/Avatar";
 
 export function HeaderWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <header className="fixed top-0 left-0 right-0 h-15 z-10 px-4 flex justify-between items-center bg-white">
+    <header className="fixed top-0 left-0 right-0 max-w-[500px] mx-auto h-15 z-10 px-4 flex justify-between items-center bg-white">
       {children}
     </header>
   );
