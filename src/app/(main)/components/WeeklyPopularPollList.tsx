@@ -6,6 +6,7 @@ import Link from "next/link";
 
 interface GETPollListResponse {
   poll_list: {
+    poll_id: number;
     cover: string;
     title: string;
     author_list: string[];
@@ -22,9 +23,9 @@ async function GETPollList() {
     const data = await fetchAPI<GETPollListResponse>(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`
     );
-    return data.poll_list.map((ele, idx) => {
+    return data.poll_list.map((ele) => {
       return {
-        pollId: idx,
+        pollId: ele.poll_id,
         cover: ele.cover,
         title: ele.title,
         authorList: ele.author_list,
@@ -44,7 +45,7 @@ export default async function WeeklyPopularPollList() {
   const fetchedPollList = await GETPollList();
 
   return (
-    <>
+    <div className="bg-white mb-4">
       <Title text="이번 주의 인기 투표" />
       <div className="overflow-auto whitespace-nowrap mt-4">
         {fetchedPollList &&
@@ -96,6 +97,6 @@ export default async function WeeklyPopularPollList() {
             );
           })}
       </div>
-    </>
+    </div>
   );
 }
