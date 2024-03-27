@@ -57,8 +57,11 @@ const CAREER_DATA = [
 
 const WEEKLY_POPULAR_POLL_DATA = [
   {
-    cover: "https://image.yes24.com/goods/124418561/XL",
+    poll_id: 1,
+    cover:
+      "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6530091%3F",
     title: "조코딩의 챗GPT API를 활용한 수익형 웹 서비스 만들기",
+    author_list: ["조동근"],
     publisher: "한빛미디어",
     transtlator_list: [],
     vote_percentage: 85,
@@ -66,6 +69,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 12,
   },
   {
+    poll_id: 2,
     cover:
       "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F927035%3Ftimestamp%3D20231227170332",
     title: "Clean Code(클린 코드)",
@@ -77,6 +81,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 71,
   },
   {
+    poll_id: 3,
     cover: "https://covers.oreillystatic.com/images/9780596517748/lrg.jpg",
     title: "JavaScript: The Good Parts",
     author_list: ["Douglas Crockford"],
@@ -87,6 +92,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 56,
   },
   {
+    poll_id: 4,
     cover: "https://image.yes24.com/goods/77283734/XL",
     title:
       "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -98,6 +104,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 102,
   },
   {
+    poll_id: 5,
     cover: "https://image.yes24.com/goods/108192370/XL",
     title: "Head First Design Patterns",
     author_list: ["Eric Freeman", "Elisabeth Robson"],
@@ -108,6 +115,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 75,
   },
   {
+    poll_id: 6,
     cover: "https://image.yes24.com/goods/98385788/XL",
     title: "Eloquent JavaScript: A Modern Introduction to Programming",
     author_list: ["Marijn Haverbeke"],
@@ -118,6 +126,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 68,
   },
   {
+    poll_id: 7,
     cover: "https://image.yes24.com/goods/120800356/XL",
     title: "Python Crash Course",
     author_list: ["Eric Matthes"],
@@ -128,6 +137,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 91,
   },
   {
+    poll_id: 8,
     cover: "https://image.yes24.com/goods/71926161/XL",
     title:
       "Learning React: A Hands-On Guide to Building Web Applications Using React and Redux",
@@ -139,6 +149,7 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 42,
   },
   {
+    poll_id: 9,
     cover: "https://image.yes24.com/momo/TopCate62/MidCate10/6199612.jpg",
     title: "Design Patterns: Elements of Reusable Object-Oriented Software",
     author_list: [
@@ -154,6 +165,18 @@ const WEEKLY_POPULAR_POLL_DATA = [
     opinion_count: 99,
   },
 ];
+
+const NEWEST_POLL_DATA = WEEKLY_POPULAR_POLL_DATA.map((ele) => {
+  return {
+    poll_id: ele.poll_id,
+    cover: ele.cover,
+    title: ele.title,
+    author_list: ele.author_list,
+    publisher: ele.publisher,
+    translator_list: ele.translator_list,
+    vote_percentage: ele.vote_percentage,
+  };
+}).sort(() => Math.random() - 0.5);
 
 export const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`, () => {
@@ -176,5 +199,8 @@ export const handlers = [
   ),
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`, () => {
     return HttpResponse.json({ poll_list: WEEKLY_POPULAR_POLL_DATA });
+  }),
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`, () => {
+    return HttpResponse.json({ poll_list: NEWEST_POLL_DATA });
   }),
 ];
