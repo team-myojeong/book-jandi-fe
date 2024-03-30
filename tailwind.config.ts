@@ -59,5 +59,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  safelist: [{ pattern: /w-.+/ }],
 };
 export default config;
