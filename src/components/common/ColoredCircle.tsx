@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 export default function ColoredCircle({
   width,
   percentage = 100,
@@ -7,9 +5,9 @@ export default function ColoredCircle({
   width: number;
   percentage: number;
 }) {
-  const rem = useMemo(() => width / 4, [width]);
+  const rem = width / 4;
+  const size = `h-${rem} w-${rem}`;
 
-  /* ISSUE: w-${rem}을 제일 앞에 두는 경우 먹히지 않는 문제 */
   //TODO: percentage에 따른 background variation*/
-  return <div className={`rounded-full w-${rem} h-${rem} bg-green-500`} />;
+  return <div className={`rounded-full ${size} bg-green-500`} />;
 }
