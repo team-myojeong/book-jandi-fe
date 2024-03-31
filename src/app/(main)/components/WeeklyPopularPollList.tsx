@@ -70,7 +70,7 @@ export default async function WeeklyPopularPollList() {
                     className="rounded-lg"
                     alt={`book-cover-${title}`}
                     src={cover}
-                    style={{ width: "auto", height: "100%" }}
+                    style={{ width: "8rem", height: "100%" }}
                   />
                   <div className="flex">
                     <ColoredCircle width={20} percentage={100} />
