@@ -2,11 +2,11 @@
 
 import Button from "@/components/common/Button";
 import { useEffect, useState } from "react";
-import StepChips from "./components/StepChip";
+import StepChips from "./_components/StepChip";
 
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
 import { useRouter } from "next/navigation";
-import { useFunnel } from "./funnel/useFunnel";
+import { useFunnel } from "./_funnel/useFunnel";
 import { fetchAPI } from "@/apis/route";
 
 interface JobData {
