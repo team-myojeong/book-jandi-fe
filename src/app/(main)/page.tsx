@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
-import WeeklyPopularPollList from "./components/WeeklyPopularPollList";
-import NewestPollList from "./components/NewestPollList";
-import FloatingButton from "./components/FloatingButton";
+import WeeklyPopularPollList from "./_components/WeeklyPopularPollList";
+import NewestPollList from "./_components/NewestPollList";
+import FloatingButton from "./_components/FloatingButton";
 
 export default function Main() {
   return (
