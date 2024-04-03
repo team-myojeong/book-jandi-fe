@@ -178,6 +178,47 @@ const NEWEST_POLL_DATA = WEEKLY_POPULAR_POLL_DATA.map((ele) => {
   };
 }).sort(() => Math.random() - 0.5);
 
+export const SEARCH_DATA = [
+  {
+    cover:
+      "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F927035%3Ftimestamp%3D20231227170332",
+    title: "Clean Code(클린 코드)",
+    author_list: ["로버트 C. 마틴"],
+    publisher: "인사이트",
+    translator_list: ["박재호"],
+    poll_count: 321,
+    isbn: "9788966260959",
+  },
+  {
+    cover: "https://image.yes24.com/goods/77283734/XL",
+    title:
+      "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+    author_list: ["Robert C. Martin"],
+    publisher: "Prentice Hall",
+    translator_list: [],
+    poll_count: 876,
+    isbn: "9780134494166",
+  },
+  {
+    cover: "https://image.yes24.com/goods/108192370/XL",
+    title: "Head First Design Patterns",
+    author_list: ["Eric Freeman", "Elisabeth Robson"],
+    publisher: "O'Reilly Media",
+    translator_list: ["서환수"],
+    poll_count: 632,
+    isbn: "9781492078005",
+  },
+  {
+    cover: "https://image.yes24.com/goods/98385788/XL",
+    title: "Eloquent JavaScript: A Modern Introduction to Programming",
+    author_list: ["Marijn Haverbeke"],
+    publisher: "No Starch Press",
+    translator_list: [],
+    poll_count: 543,
+    isbn: "9781593279509",
+  },
+];
+
 export const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`, () => {
     return HttpResponse.json({ job_list: JOBS_DATA });
@@ -203,4 +244,16 @@ export const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`, () => {
     return HttpResponse.json({ poll_list: NEWEST_POLL_DATA });
   }),
+  http.get(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/book/search`,
+    ({ request }) => {
+      const url = new URL(request.url);
+      const keyword = url.searchParams.get("keyword");
+
+      if (!keyword) {
+        return new HttpResponse(null, { status: 404 });
+      }
+      return HttpResponse.json({ book_list: SEARCH_DATA });
+    }
+  ),
 ];
