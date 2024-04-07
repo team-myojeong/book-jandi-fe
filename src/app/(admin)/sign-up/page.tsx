@@ -7,7 +7,7 @@ import StepChips from "./components/StepChip";
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
 import { useRouter } from "next/navigation";
 import { useFunnel } from "./funnel/useFunnel";
-import { fetchAPI } from "@/app/api/route";
+import { fetchAPI } from "@/apis/route";
 
 interface JobData {
   jobId: number;
