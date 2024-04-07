@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Title from "./Title";
 import ColoredCircle from "@/components/common/ColoredCircle";
-import { fetchAPI } from "@/app/api/route";
+import { fetchAPI } from "@/apis/route";
 import Link from "next/link";
 
 interface GETPollListResponse {
