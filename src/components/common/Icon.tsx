@@ -22,7 +22,7 @@ export function Icon({
   );
 }
 
-type IconType =
+export type IconType =
   | "alarm/alert"
   | "alarm/default"
   | "arrow/left"
@@ -39,15 +39,18 @@ type IconType =
   | "grass/bad"
   | "grass/good"
   | "alert"
+  | "camera"
   | "cat"
   | "check"
   | "close"
   | "comment"
   | "eye"
   | "favorite"
-  | "grass"
+  | "hamburger"
+  | "kakao"
   | "leaf"
   | "log-out"
+  | "logo"
   | "magnifier"
   | "menu-dots"
   | "setting"
