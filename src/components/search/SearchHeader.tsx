@@ -1,21 +1,21 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IconButton from "../common/IconButton";
 import { HeaderWrapper } from "../layout/Header";
-import { useDebouncedSearch } from "@/hooks/useDebounceSearch";
-import { BookSearchDTO, SearchContext } from "@/app/(main)/search/page";
+import { BookSearchDTO } from "@/app/(main)/search/page";
 import useDebounce from "@/hooks/useDebounce";
+import { useBookStore } from "@/stores/book-store-provider";
 
 interface SearchHeaderProps<T> {
   placeholder: string;
-  getAPI: (slug: string) => Promise<T[] | undefined>;
+  getAPI: (slug: string) => Promise<T[]>;
 }
 
 export default function SearchHeader<T extends BookSearchDTO>({
   placeholder,
   getAPI,
 }: SearchHeaderProps<T>) {
-  const context = useContext(SearchContext);
+  const { setIsEmptyKeyword, setFetchedData } = useBookStore((state) => state);
   const [inputTitle, setInputTitle] = useState("");
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTitle(e.target.value);
@@ -25,13 +25,13 @@ export default function SearchHeader<T extends BookSearchDTO>({
 
   useEffect(() => {
     if (debouncedValue.length === 0) {
-      context?.setIsEmptyKeyword(true);
+      setIsEmptyKeyword(true);
       return;
     }
     const fetchSearchedValue = async () => {
       const fetchedData = await getAPI(debouncedValue);
-      context?.onChangeValue(fetchedData || []);
-      context?.setIsEmptyKeyword(false);
+      setFetchedData(fetchedData);
+      setIsEmptyKeyword(false);
     };
     fetchSearchedValue();
   }, [debouncedValue]);
