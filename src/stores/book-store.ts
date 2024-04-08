@@ -8,9 +8,9 @@ type BookState<T> = {
 };
 
 type BookActions<T> = {
-  toggleIsEmptyKeyword: (isEmpty: boolean) => void;
+  setIsEmptyKeyword: (isEmpty: boolean) => void;
   setFetchedData: (data: T[]) => void;
-  setselectedBook: (data: T) => void;
+  setSelectedBook: (data: T) => void;
 };
 
 export type BookStore = BookState<BookSearchDTO> & BookActions<BookSearchDTO>;
@@ -20,11 +20,11 @@ export const createBookStore = () => {
     isEmptyKeyword: true,
     fetchedData: null,
     selectedBook: null,
-    toggleIsEmptyKeyword: () =>
-      set((state) => ({ isEmptyKeyword: !state.isEmptyKeyword })),
+    setIsEmptyKeyword: (isEmpty: boolean) =>
+      set(() => ({ isEmptyKeyword: isEmpty })),
     setFetchedData: (fetchedData: BookSearchDTO[]) =>
       set(() => ({ fetchedData })),
-    setselectedBook: (selectedBook: BookSearchDTO) =>
+    setSelectedBook: (selectedBook: BookSearchDTO) =>
       set(() => ({ selectedBook })),
   }));
 };

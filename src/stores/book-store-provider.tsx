@@ -18,7 +18,7 @@ export const BookStoreProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useBoookStore = <T,>(selector: (store: BookStore) => T) => {
+export const useBookStore = <T,>(selector: (store: BookStore) => T) => {
   const bookStoreContext = useContext(BookStoreContext);
   if (!bookStoreContext) {
     throw new Error(`useCounterStore must be use within CounterStoreProvider`);

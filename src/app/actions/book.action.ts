@@ -14,6 +14,6 @@ export async function GETBookByKeyword(keyword: string) {
     );
     return data.book_list;
   } catch (error) {
-    console.error("Fail to fetch data: ", error);
+    throw new Error("Fail to fetch data");
   }
 }
