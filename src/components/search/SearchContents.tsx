@@ -5,9 +5,8 @@ import { useRouter } from "next/navigation";
 import SearchItem from "./SearchItem";
 
 export default function SearchContents() {
-  const { fetchedData, isEmptyKeyword, setSelectedBook } = useBookStore(
-    (state) => state
-  );
+  const { fetchedData, isEmptyKeyword, setSelectedBook, isFromPostPage } =
+    useBookStore((state) => state);
   const router = useRouter();
 
   if (isEmptyKeyword || !fetchedData) return null;
@@ -27,6 +26,7 @@ export default function SearchContents() {
         <SearchItem
           key={book.isbn}
           data={book}
+          isFromPostPage={isFromPostPage}
           onClickRouteToAddPost={onClickRouteToAddPost}
         />
       ))}

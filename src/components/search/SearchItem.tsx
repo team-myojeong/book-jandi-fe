@@ -5,9 +5,11 @@ import { BookSearchDTO } from "@/app/(main)/search/page";
 
 export default function SearchItem<T extends BookSearchDTO>({
   data,
+  isFromPostPage,
   onClickRouteToAddPost,
 }: {
   data: T;
+  isFromPostPage: boolean;
   onClickRouteToAddPost: (selected: T) => void;
 }) {
   return (
@@ -43,7 +45,7 @@ export default function SearchItem<T extends BookSearchDTO>({
           onClick={() => onClickRouteToAddPost(data)}
         >
           <Icon
-            name="document/add"
+            name={isFromPostPage ? "check" : "document/add"}
             alt="add-poll-post"
             width={16}
             height={16}
