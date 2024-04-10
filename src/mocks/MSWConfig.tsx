@@ -10,16 +10,11 @@ export default function MSWConfig({ children }: Props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_AWS_STATUS === 'development'){
+    if (process.env.NODE_ENV === "development") {
       import("@/mocks/index")
         .then((res) => res.initMSW())
         .then(() => setLoaded(true));
-    }
-    if (process.env.NODE_ENV === "development") {
-      // import("@/mocks/index")
-      //   .then((res) => res.initMSW())
-      //   .then(() => setLoaded(true));
-      setLoaded(true)
+      setLoaded(true);
     } else {
       setLoaded(true);
     }
