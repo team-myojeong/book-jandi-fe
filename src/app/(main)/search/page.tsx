@@ -3,7 +3,8 @@ import { GETBookByKeyword } from "@/app/actions/book.action";
 import SearchContents from "@/components/search/SearchContents";
 import SearchFooter from "@/components/search/SearchFooter";
 import SearchHeader from "@/components/search/SearchHeader";
-import { Dispatch, SetStateAction, createContext } from "react";
+import { useBookStore } from "@/stores/book-store-provider";
+import { Dispatch, SetStateAction, createContext, useEffect } from "react";
 
 export const SearchContext = createContext<
   SearchContextType<BookSearchDTO> | undefined
@@ -31,6 +32,11 @@ export type BookSearchDTO = BookDTO & {
 };
 
 export default function Search() {
+  const { setIsFromPostPage } = useBookStore((state) => state);
+
+  useEffect(() => {
+    setIsFromPostPage(false);
+  }, []);
   return (
     <>
       <SearchHeader<BookSearchDTO>
