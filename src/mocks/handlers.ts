@@ -256,4 +256,35 @@ export const handlers = [
       return HttpResponse.json({ book_list: SEARCH_DATA });
     }
   ),
+  http.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`, ({ request }) => {
+    type TRequestBody = {
+      difficulty_level: 1 | 2 | 3;
+      question: string;
+      description?: string;
+      book: {
+        isbn: string;
+        cover: string;
+        title: string;
+        author_list: string[];
+        translator_list: string[];
+        publisher: string;
+      };
+    };
+    const body: unknown = request.body;
+    const postPollRequestBody = body as TRequestBody;
+    const isValidRequestBody =
+      !!postPollRequestBody.difficulty_level &&
+      !!postPollRequestBody.question &&
+      !!postPollRequestBody.book &&
+      !!postPollRequestBody.book.isbn &&
+      !!postPollRequestBody.book.cover &&
+      !!postPollRequestBody.book.title &&
+      !!postPollRequestBody.book.author_list &&
+      !!postPollRequestBody.book.publisher;
+    if (isValidRequestBody) {
+      return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
+    }
+    console.error("Invalid Request Body:", postPollRequestBody);
+    return HttpResponse.json({ id: -1 }, { status: 400 });
+  }),
 ];
