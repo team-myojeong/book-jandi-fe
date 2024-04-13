@@ -4,6 +4,7 @@ import LogoButton from "@/components/common/LogoButton";
 import IconButton from "@/components/common/IconButton";
 import Button from "@/components/common/Button";
 import Avatar from "@/components/common/Avatar";
+import { useRouter } from "next/navigation";
 
 export function HeaderWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export function HeaderWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export function Header({ isLogin = false }: { isLogin?: boolean }) {
+  const router = useRouter();
   return (
     <HeaderWrapper>
       <div className="flex">
@@ -28,7 +30,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
         <IconButton
           name="magnifier"
           alt="search-button"
-          onClick={() => console.log("검색")}
+          onClick={() => router.push("/search")}
         />
         {!isLogin ? (
           <div className="h-9.5">
@@ -36,7 +38,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
               color="green"
               state="default"
               text="회원가입/로그인"
-              onClick={() => console.log("회원가입/로그인 버튼")}
+              onClick={() => router.push("/welcome")}
             />
           </div>
         ) : (
