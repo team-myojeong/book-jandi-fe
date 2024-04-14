@@ -5,6 +5,7 @@ import { HeaderWrapper } from "../layout/Header";
 import { BookSearchDTO } from "@/app/(main)/search/page";
 import useDebounce from "@/hooks/useDebounce";
 import { useBookStore } from "@/stores/book-store-provider";
+import { useRouter } from "next/navigation";
 
 interface SearchHeaderProps<T> {
   placeholder: string;
@@ -15,6 +16,7 @@ export default function SearchHeader<T extends BookSearchDTO>({
   placeholder,
   getAPI,
 }: SearchHeaderProps<T>) {
+  const router = useRouter();
   const { setIsEmptyKeyword, setFetchedData } = useBookStore((state) => state);
   const [inputTitle, setInputTitle] = useState("");
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,7 @@ export default function SearchHeader<T extends BookSearchDTO>({
       <IconButton
         name="arrow/left"
         alt="back-button"
-        onClick={() => console.log("뒤로가기 버튼")}
+        onClick={() => router.back()}
       />
       <input
         className="w-full outline-none "

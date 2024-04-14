@@ -26,6 +26,7 @@ export default function SearchItem<T extends BookSearchDTO>({
           <div>
             <div className="body2-emphasis">{data.title}</div>
             <div className="flex body2 text-gray-700 gap-1">
+              {/* TODO 조치 취해야 함 */}
               <div>{summaryAuthors(data.author_list)}</div>
               <div>
                 {"("}

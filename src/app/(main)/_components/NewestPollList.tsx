@@ -92,7 +92,7 @@ export default async function NewestPollList() {
                   </div>
                 </div>
               </div>
-              <hr className="border border-[#D9D9D9] mt-2" />
+              <hr className="h-[0.063rem] border-[#D9D9D9] mt-2" />
             </Link>
           );
         })}
