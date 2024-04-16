@@ -22,7 +22,7 @@ export default function StepChips({
   activeIndex: number;
 }) {
   return (
-    <div className="flex justify-center gap-4">
+    <div className="flex justify-center gap-4 mt-4 mb-8">
       {Array(totalChips)
         .fill(0)
         .map((_, idx) => {
