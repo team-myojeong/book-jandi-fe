@@ -1,8 +1,8 @@
 import { summaryAuthors } from "@/app/utils/arrayToString";
 import { Icon } from "../common/Icon";
-import Image from "next/image";
 import { BookSearchDTO } from "@/app/(main)/search/page";
 import { useBookStore } from "@/stores/book-store-provider";
+import BookThumbnail from "../common/BookThumbnail";
 
 export default function SearchItem<T extends BookSearchDTO>({
   data,
@@ -22,12 +22,11 @@ export default function SearchItem<T extends BookSearchDTO>({
   return (
     <div className="flex justify-between p-4">
       <div className="flex-1 flex">
-        <Image
-          alt={`searched-image=${data.isbn}`}
-          src={data.cover}
+        <BookThumbnail
           width={64}
           height={80}
-          style={{ height: "auto" }}
+          alt={`book-cover-${data.isbn}`}
+          src={data.cover}
         />
         <div className="text-start flex flex-col justify-between ml-3">
           <div>
