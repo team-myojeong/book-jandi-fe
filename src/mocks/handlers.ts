@@ -228,10 +228,10 @@ export const handlers = [
   }),
   http.post(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/signup`,
-    ({ request }) => {
+    async ({ request }) => {
       type TRequestBody = { job_id: number; career_id: number };
-      const body: unknown = request.body;
-      const signUpRequestBody = body as TRequestBody;
+      const newUser = await request.json();
+      const signUpRequestBody = newUser as TRequestBody;
       if (!!signUpRequestBody.job_id && !!signUpRequestBody.career_id) {
         return HttpResponse.json({ success: true });
       }
@@ -256,35 +256,37 @@ export const handlers = [
       return HttpResponse.json({ book_list: SEARCH_DATA });
     }
   ),
-  http.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`, ({ request }) => {
-    type TRequestBody = {
-      difficulty_level: 1 | 2 | 3;
-      question: string;
-      description?: string;
-      book: {
-        isbn: string;
-        cover: string;
-        title: string;
-        author_list: string[];
-        translator_list: string[];
-        publisher: string;
+  http.post(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
+    async ({ request }) => {
+      type TRequestBody = {
+        difficulty_level: 1 | 2 | 3;
+        question: string;
+        description?: string;
+        book: {
+          isbn: string;
+          cover: string;
+          title: string;
+          author_list: string[];
+          translator_list: string[];
+          publisher: string;
+        };
       };
-    };
-    const body: unknown = request.body;
-    const postPollRequestBody = body as TRequestBody;
-    const isValidRequestBody =
-      !!postPollRequestBody.difficulty_level &&
-      !!postPollRequestBody.question &&
-      !!postPollRequestBody.book &&
-      !!postPollRequestBody.book.isbn &&
-      !!postPollRequestBody.book.cover &&
-      !!postPollRequestBody.book.title &&
-      !!postPollRequestBody.book.author_list &&
-      !!postPollRequestBody.book.publisher;
-    if (isValidRequestBody) {
-      return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
+      const newPost = await request.json();
+      const postPollRequestBody = newPost as TRequestBody;
+      const isValidRequestBody =
+        !!postPollRequestBody.difficulty_level &&
+        !!postPollRequestBody.question &&
+        !!postPollRequestBody.book &&
+        !!postPollRequestBody.book.isbn &&
+        !!postPollRequestBody.book.cover &&
+        !!postPollRequestBody.book.title &&
+        !!postPollRequestBody.book.author_list &&
+        !!postPollRequestBody.book.publisher;
+      if (isValidRequestBody) {
+        return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
+      }
+      return HttpResponse.json({ id: -1 }, { status: 400 });
     }
-    console.error("Invalid Request Body:", postPollRequestBody);
-    return HttpResponse.json({ id: -1 }, { status: 400 });
-  }),
+  ),
 ];

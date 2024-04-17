@@ -7,7 +7,10 @@ import StepChips from "./_components/StepChip";
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
 import { useRouter } from "next/navigation";
 import { useFunnel } from "./_funnel/useFunnel";
-import { fetchAPI } from "@/apis/route";
+import { GETCareerList, GETJobList } from "@/actions/static.action";
+import FunnelTitle from "./_components/FunnelTitle";
+import BottomFixedBottom from "@/components/common/BottomFixedBottom";
+import { POSTSignUp, SignUpForm } from "@/actions/user.action";
 
 interface JobData {
   jobId: number;
@@ -19,74 +22,6 @@ interface CareerData {
   careerId: number;
   careerText: string;
   isSelected: boolean;
-}
-
-interface SignUpForm {
-  job_id?: number;
-  career_id?: number;
-}
-
-interface GETJobListResponse {
-  job_list: {
-    job_id: number;
-    job_text: string;
-  }[];
-}
-
-async function GETJobList() {
-  try {
-    const data = await fetchAPI<GETJobListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`
-    );
-    return data.job_list.map((ele) => {
-      return { jobId: ele.job_id, jobText: ele.job_text, isSelected: false };
-    });
-  } catch (error) {
-    console.error("Fail to fetch data:", error);
-  }
-}
-
-interface GETCareerListResponse {
-  career_list: {
-    career_id: number;
-    career_text: string;
-  }[];
-}
-async function GETCareerList() {
-  try {
-    const data = await fetchAPI<GETCareerListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/career`
-    );
-    return data.career_list.map((ele) => {
-      return {
-        careerId: ele.career_id,
-        careerText: ele.career_text,
-        isSelected: false,
-      };
-    });
-  } catch (error) {
-    console.error("Fail to fetch data:", error);
-  }
-}
-
-interface POSTSignUpResponse {
-  success: boolean;
-}
-
-async function POSTSignUp(requestBody: SignUpForm) {
-  try {
-    const result = await fetchAPI<POSTSignUpResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/signup`,
-      "POST",
-      "json",
-      {
-        ...requestBody,
-      }
-    );
-    return result.success;
-  } catch (error) {
-    console.error("Fail to fetch data:", error);
-  }
 }
 
 export default function Page() {
@@ -159,8 +94,11 @@ export default function Page() {
       <Funnel>
         <Funnel.Step name="JOB">
           <StepChips activeIndex={1} />
-          <p className="title1">직무를 선택해 주세요!</p>
-          <p className="body1">본인의 주 개발 분야를 선택해 주세요!</p>
+          <FunnelTitle
+            title="직무를 선택해 주세요!"
+            subTitle="본인의 주 개발 분야를 선택해 주세요!"
+            className="mb-12"
+          />
           <div className="grid grid-cols-3 gap-x-2 gap-y-4">
             {allJobData &&
               allJobData.map((ele, idx) => {
@@ -177,8 +115,7 @@ export default function Page() {
                 );
               })}
           </div>
-          <Button
-            color="green"
+          <BottomFixedBottom
             text="다음"
             state="default"
             onClick={() => setStep("CAREER")}
@@ -186,13 +123,16 @@ export default function Page() {
         </Funnel.Step>
         <Funnel.Step name="CAREER">
           <StepChips activeIndex={2} />
-          <p className="title1">개발 연차를 선택해 주세요!</p>
-          <p className="body1">얼마나 그 개발 분야를 공부하셨나요?</p>
+          <FunnelTitle
+            title="개발 연차를 선택해 주세요!"
+            subTitle="얼마나 그 개발 분야를 공부하셨나요?"
+            className="mb-12"
+          />
           <div className="flex flex-col gap-y-2">
             {allCareerData &&
               allCareerData.map((ele, idx) => {
                 return (
-                  <div key={`${ele}-${idx}`} className="w-full h-9">
+                  <div key={`${ele}-${idx}`} className="w-full h-[2.375rem]">
                     <Button
                       text={ele.careerText}
                       color="green"
@@ -204,8 +144,7 @@ export default function Page() {
                 );
               })}
           </div>
-          <Button
-            color="green"
+          <BottomFixedBottom
             text="회원가입 완료"
             state="default"
             onClick={onClickSignUpCompleteButton}
