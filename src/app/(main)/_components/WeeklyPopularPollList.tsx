@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Title from "./Title";
 import ColoredCircle from "@/components/common/ColoredCircle";
 import { fetchAPI } from "@/apis/route";
 import Link from "next/link";
+import BookThumbnail from "@/components/common/BookThumbnail";
 
 interface GETPollListResponse {
   poll_list: {
@@ -63,14 +63,11 @@ export default async function WeeklyPopularPollList() {
             return (
               <div className="inline-block w-32 text-start mr-4" key={pollId}>
                 <Link href={`/poll/${pollId}`}>
-                  <Image
-                    priority
+                  <BookThumbnail
                     width={128}
                     height={184}
-                    className="rounded-lg"
                     alt={`book-cover-${title}`}
                     src={cover}
-                    style={{ width: "8rem", height: "100%" }}
                   />
                   <div className="flex">
                     <ColoredCircle width={20} percentage={100} />
