@@ -46,10 +46,10 @@ export default function Page() {
           return { ...ele, isSelected: true };
         }
         return { ...ele, isSelected: false };
-      })
+      }),
     );
     setSignUpForm((prev) =>
-      prev ? { ...prev, job_id: e.jobId } : { job_id: e.jobId }
+      prev ? { ...prev, job_id: e.jobId } : { job_id: e.jobId },
     );
   };
 
@@ -60,10 +60,10 @@ export default function Page() {
           return { ...ele, isSelected: true };
         }
         return { ...ele, isSelected: false };
-      })
+      }),
     );
     setSignUpForm((prev) =>
-      prev ? { ...prev, career_id: e.careerId } : { career_id: e.careerId }
+      prev ? { ...prev, career_id: e.careerId } : { career_id: e.careerId },
     );
   };
 
@@ -103,12 +103,15 @@ export default function Page() {
             {allJobData &&
               allJobData.map((ele, idx) => {
                 return (
-                  <div key={`${ele}-${idx}`} className="w-full h-9">
+                  <div key={`${ele}-${idx}`} className="h-9 w-full">
                     <Button
                       text={ele.jobText}
                       color="green"
-                      state={ele.isSelected ? "default" : "disabled"}
-                      type="secondary"
+                      state={
+                        signUpForm?.job_id === ele.jobId ? "active" : "default"
+                      }
+                      type="outline"
+                      size="S"
                       onClick={() => onClickJobButton(ele)}
                     />
                   </div>
@@ -117,7 +120,7 @@ export default function Page() {
           </div>
           <BottomFixedBottom
             text="다음"
-            state="default"
+            disabled={!signUpForm?.job_id}
             onClick={() => setStep("CAREER")}
           />
         </Funnel.Step>
@@ -132,12 +135,17 @@ export default function Page() {
             {allCareerData &&
               allCareerData.map((ele, idx) => {
                 return (
-                  <div key={`${ele}-${idx}`} className="w-full h-[2.375rem]">
+                  <div key={`${ele}-${idx}`} className="h-[2.375rem] w-full">
                     <Button
                       text={ele.careerText}
                       color="green"
-                      state={ele.isSelected ? "default" : "disabled"}
-                      type="secondary"
+                      state={
+                        signUpForm?.career_id === ele.careerId
+                          ? "active"
+                          : "default"
+                      }
+                      type="outline"
+                      size="S"
                       onClick={() => onClickCareerButton(ele)}
                     />
                   </div>
@@ -146,7 +154,7 @@ export default function Page() {
           </div>
           <BottomFixedBottom
             text="회원가입 완료"
-            state="default"
+            disabled={!signUpForm?.career_id}
             onClick={onClickSignUpCompleteButton}
           />
         </Funnel.Step>

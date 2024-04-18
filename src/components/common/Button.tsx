@@ -1,4 +1,5 @@
 import { TextStyle } from "@/types/text-style";
+import { cn } from "@/utils/cn";
 
 const CSS_CONFIG = {
   green: {
@@ -7,10 +8,11 @@ const CSS_CONFIG = {
       active: "",
       disabled: "bg-grey-300 text-grey-500",
     },
-    secondary: {
-      default: "text-green-500 border border-green-500 hover:bg-green-50",
+    outline: {
+      default:
+        "bg-white text-gray-500 border border-gray-300 active:bg-green-50 hover:border-green-500 hover:text-green-500",
       active: "bg-green-50 border border-green-500 text-green-500",
-      disabled: "bg-white border border-grey-300 text-grey-500",
+      disabled: "bg-gray-100 border border-grey-300 text-grey-500",
     },
   },
   grey: {
@@ -19,10 +21,10 @@ const CSS_CONFIG = {
       active: "",
       disabled: "bg-grey-100 text-grey-400",
     },
-    secondary: {
-      default: "bg-grey-200 text-grey-900 hover:bg-grey-300",
+    outline: {
+      default: "",
       active: "",
-      disabled: "bg-grey-100 text-grey-400",
+      disabled: "",
     },
   },
   yellow: {
@@ -31,36 +33,41 @@ const CSS_CONFIG = {
       active: "",
       disabled: "bg-grey-300 text-grey-500",
     },
-    secondary: {
+    outline: {
       default:
-        "bg-yellow-50 border border-yellow-500 text-yellow-500 hover:bg-yellow-50",
-      active: "",
-      disabled: "bg-white border border-grey-300 text-grey-500",
+        "bg-white text-gray-500 border border-gray-300 active:bg-yellow-50 hover:border-yellow-500 hover:text-yellow-500",
+      active: "bg-yellow-50 border border-yellow-500 text-yellow-500",
+      disabled: "bg-gray-100 border border-grey-300 text-grey-500",
     },
   },
 };
 
 export default function Button({
-  color,
-  type = "primary",
-  state,
-  onClick,
   text,
-  textStyle = "body2",
-  isDisabled = false,
+  color,
+  state,
+  type = "primary",
+  size = "L",
+  isDisabled,
+  onClick,
 }: {
-  color: "green" | "grey" | "yellow";
-  type?: "primary" | "secondary";
-  state: "default" | "disabled" | "active";
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
-  textStyle?: TextStyle;
+  color: "green" | "grey" | "yellow";
+  state: "default" | "disabled" | "active";
+  type?: "primary" | "outline";
+  size?: "L" | "M" | "S";
   isDisabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
     <button
       disabled={isDisabled}
-      className={`rounded-lg w-full h-full ${CSS_CONFIG[color][type][state]} ${textStyle}`}
+      className={cn(
+        `w-full whitespace-pre rounded-lg transition ease-linear ${CSS_CONFIG[color][type][state]}`,
+        size === "L" && "title2 px-4 py-3",
+        size === "M" && "body1-emphasis px-4 py-2",
+        size === "S" && "body2 px-4 py-[10px]",
+      )}
       onClick={onClick}
     >
       {text}

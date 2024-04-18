@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export function HeaderWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <header className="fixed top-0 left-0 right-0 max-w-[500px] mx-auto h-15 z-10 px-4 flex justify-between items-center bg-white">
+    <header className="fixed left-0 right-0 top-0 z-10 mx-auto flex h-15 max-w-[500px] items-center justify-between bg-white px-4">
       {children}
     </header>
   );
@@ -35,9 +35,10 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
         {!isLogin ? (
           <div className="h-9.5">
             <Button
+              text="회원가입/로그인"
               color="green"
               state="default"
-              text="회원가입/로그인"
+              size="S"
               onClick={() => router.push("/welcome")}
             />
           </div>
@@ -63,8 +64,8 @@ export function HeaderWithSingleArrow({
         alt="back-button"
         onClick={onClickLeftArrow}
       />
-      <span className="font-semibold text-lg">{title}</span>
-      <div className="w-6 h-6 invisible" />
+      <span className="text-lg font-semibold">{title}</span>
+      <div className="invisible h-6 w-6" />
     </HeaderWrapper>
   );
 }
