@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAPI } from "@/apis/route";
+import { POSTSignUp } from "@/actions/poll.action";
 import Button from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
@@ -8,39 +8,6 @@ import SearchItem from "@/components/search/SearchItem";
 import { useBookStore } from "@/stores/book-store-provider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-interface PostForm {
-  difficulty_level: 1 | 2 | 3;
-  question: string;
-  description?: string;
-  book: {
-    title: string;
-    cover: string;
-    author_list: string[];
-    publisher: string;
-    translator_list: string[];
-    isbn: string;
-  };
-}
-interface POSTPollResponse {
-  id: number;
-}
-
-async function POSTSignUp(requestBody: PostForm) {
-  try {
-    const result = await fetchAPI<POSTPollResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
-      "POST",
-      "json",
-      {
-        ...requestBody,
-      }
-    );
-    return result.id;
-  } catch (error) {
-    console.error("Fail to fetch data:", error);
-  }
-}
 
 export default function Page() {
   const router = useRouter();
