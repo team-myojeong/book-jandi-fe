@@ -49,10 +49,10 @@ const JOBS_DATA = [
 
 const CAREER_DATA = [
   { career_id: 1, career_text: "신입(0-1년 미만)" },
-  { career_id: 2, career_text: "1년 이상-3년 미만" },
-  { career_id: 3, career_text: "3년 이상-5년 미만" },
-  { career_id: 4, career_text: "5년 이상-7년 미만" },
-  { career_id: 5, career_text: "7년 이상" },
+  { career_id: 2, career_text: "1년-3년" },
+  { career_id: 3, career_text: "4년-6년" },
+  { career_id: 4, career_text: "7년-9년" },
+  { career_id: 5, career_text: "10년 이상" },
 ];
 
 const WEEKLY_POPULAR_POLL_DATA = [
