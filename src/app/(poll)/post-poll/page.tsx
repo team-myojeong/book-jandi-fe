@@ -62,24 +62,24 @@ export default function Page() {
       />
       {!selectedBook && (
         <button
-          className="w-full py-4 flex bg-grey-100 border border-grey-300 rounded-lg items-center justify-center"
+          className="flex w-full items-center justify-center rounded-lg border border-grey-300 bg-grey-100 py-4"
           onClick={() => router.push("/post-poll/search-book")}
         >
-          <div className="rounded-full bg-grey-500 w-10 h-10 flex justify-center items-center mr-4">
+          <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-grey-500">
             <Icon name="book/plus" alt="add-poll-post" width={24} height={24} />
           </div>
           <span className="text-grey-500">궁금한 책을 검색해 주세요!</span>
         </button>
       )}
       {selectedBook && (
-        <div className="border border-grey-300 rounded-lg">
+        <div className="rounded-lg border border-grey-300">
           <SearchItem
             key={selectedBook.isbn}
             data={selectedBook}
             onClickRouteToAddPost={onClickEditBook}
           >
             <button
-              className="w-8 h-8 border rounded-full border-grey-500 flex justify-center items-center flex-none"
+              className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-grey-500"
               onClick={onClickEditBook}
             >
               <Icon
@@ -92,54 +92,58 @@ export default function Page() {
           </SearchItem>
         </div>
       )}
-      <div className="text-start mt-8 mb-4">
+      <div className="mb-4 mt-8 text-start">
         <div className="title2 text-grey-700">현재 상황을 알려주세요!</div>
         <div className="body2 text-grey-500">
           투표 결과를 정확하게 전달드리기 위해 몇가지 정보를 받고 있어요.
         </div>
       </div>
 
-      <div className="w-full p-4 rounded-2xl shadow-lg grid gap-y-8">
+      <div className="grid w-full gap-y-8 rounded-2xl p-4 shadow-lg">
         <div>
-          <div className="body2-emphasis text-start mb-2">
+          <div className="body2-emphasis mb-2 text-start">
             고르신 책의 분야를 잘 이해하고 계신가요?
           </div>
-          <div className="flex h-14 gap-2 button:px-4 *:px-4">
+          <div className="button:px-4 flex h-14 gap-2 *:px-4">
             <Button
-              text="아니오 잘 몰라요"
+              text={`아니오\n잘 몰라요`}
               color="green"
               state={pollForm.difficulty_level === 1 ? "active" : "default"}
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={() => onClickDifficultyButton(1)}
             />
             <Button
-              text="어느 정도는 알고 있어요"
+              text={`어느 정도는\n알고 있어요`}
               color="green"
               state={pollForm.difficulty_level === 2 ? "active" : "default"}
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={() => onClickDifficultyButton(2)}
             />
             <Button
-              text="잘 이해하고 있어요!"
+              text={`잘 이해하고\n있어요!`}
               color="green"
               state={pollForm.difficulty_level === 3 ? "active" : "default"}
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={() => onClickDifficultyButton(3)}
             />
           </div>
         </div>
         <div>
-          <div className="body2-emphasis text-start mb-2">
+          <div className="body2-emphasis mb-2 text-start">
             어떤 부분이 궁금하세요?
           </div>
-          <div className="h-36 flex flex-col gap-2">
+          <div className="flex h-36 flex-col gap-2">
             <Button
               text="그냥 궁금해요!"
               color="green"
               state={
                 pollForm.question === "그냥 궁금해요!" ? "active" : "default"
               }
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={onClickQuestionButton}
             />
             <Button
@@ -150,7 +154,8 @@ export default function Page() {
                   ? "active"
                   : "default"
               }
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={onClickQuestionButton}
             />
             <Button
@@ -161,25 +166,27 @@ export default function Page() {
                   ? "active"
                   : "default"
               }
-              type="secondary"
+              type="outline"
+              size="S"
               onClick={onClickQuestionButton}
             />
           </div>
         </div>
         <div>
-          <div className="body2-emphasis text-start mb-2">
+          <div className="body2-emphasis mb-2 text-start">
             내용을 작성해주세요(선택사항)
           </div>
           <textarea
-            className="outline-none w-full border border-grey-300 rounded-lg p-4 resize-none"
+            className="w-full resize-none rounded-lg border border-grey-300 p-4 outline-none"
             rows={5}
           />
         </div>
       </div>
-      <div className="fixed mr-4 w-full max-w-[29.25rem] h-32 bottom-0 py-4 flex justify-center *:h-12 *:title2 bg-white">
+      <div className="*:title2 fixed bottom-0 mr-4 flex h-32 w-full max-w-[29.25rem] justify-center bg-white py-4 *:h-12">
         <Button
-          color="green"
           text="다음"
+          color="green"
+          // TODO: validation
           state="default"
           onClick={onSubmitPoll}
         />
