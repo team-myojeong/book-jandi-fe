@@ -1,4 +1,3 @@
-import { TextStyle } from "@/types/text-style";
 import { cn } from "@/utils/cn";
 
 const CSS_CONFIG = {
