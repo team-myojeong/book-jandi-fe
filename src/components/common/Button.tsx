@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { HTMLProps } from "react";
 
 const CSS_CONFIG = {
   green: {
@@ -48,6 +49,7 @@ export default function Button({
   type = "primary",
   size = "L",
   isDisabled,
+  className,
   onClick,
 }: {
   text: string;
@@ -56,6 +58,7 @@ export default function Button({
   type?: "primary" | "outline";
   size?: "L" | "M" | "S";
   isDisabled?: boolean;
+  className?: HTMLProps<HTMLButtonElement>["className"];
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
@@ -66,6 +69,7 @@ export default function Button({
         size === "L" && "title2 px-4 py-3",
         size === "M" && "body1-emphasis px-4 py-2",
         size === "S" && "body2 px-4 py-[10px]",
+        className,
       )}
       onClick={onClick}
     >
