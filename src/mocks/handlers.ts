@@ -219,6 +219,32 @@ export const SEARCH_DATA = [
   },
 ];
 
+const POLL_POST_DATA = {
+  poll: {
+    cover:
+      "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F927035%3Ftimestamp%3D20231227170332",
+    title: "Clean Code(클린 코드)",
+    author_list: ["로버트 C. 마틴"],
+    publisher: "인사이트",
+    translator_list: ["박재호"],
+    question: "입문자가 읽기에 적합한가요?",
+    difficulty_level: 1,
+    description:
+      "호잇호잇 둘리는 입문자가 읽고 싶은데 너무 어려운 것은 아닌지 모르겠네요, 읽어보신 분이 있다면 자세한 후기를 알려주세요!",
+  },
+  writer_info: {
+    id: 1,
+    name: "코드캡쳐체리",
+    profile:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZV7-fHgwtEs7Qqx0UoMQ4BX-849Ashm2DN8vJrymhfjAxcCadrOo38ObuLrCGfFpd2Tk&usqp=CAU",
+    job: "프론트엔드",
+    career: "1-3년",
+  },
+  vote: "green",
+  is_bookmark: false,
+  is_mine: false,
+};
+
 export const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`, () => {
     return HttpResponse.json({ job_list: JOBS_DATA });
@@ -236,7 +262,7 @@ export const handlers = [
         return HttpResponse.json({ success: true });
       }
       return HttpResponse.json({ success: false });
-    }
+    },
   ),
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`, () => {
     return HttpResponse.json({ poll_list: WEEKLY_POPULAR_POLL_DATA });
@@ -254,7 +280,7 @@ export const handlers = [
         return new HttpResponse(null, { status: 404 });
       }
       return HttpResponse.json({ book_list: SEARCH_DATA });
-    }
+    },
   ),
   http.post(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
@@ -287,6 +313,15 @@ export const handlers = [
         return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
       }
       return HttpResponse.json({ id: -1 }, { status: 400 });
-    }
+    },
   ),
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`, ({ request }) => {
+    const url = new URL(request.url);
+    const id = url.searchParams.get("id");
+
+    if (!id) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    return HttpResponse.json(POLL_POST_DATA);
+  }),
 ];
