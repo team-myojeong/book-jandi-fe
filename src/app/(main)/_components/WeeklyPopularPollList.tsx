@@ -21,7 +21,7 @@ interface GETPollListResponse {
 async function GETPollList() {
   try {
     const data = await fetchAPI<GETPollListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`,
     );
     return data.poll_list.map((ele) => {
       return {
@@ -45,9 +45,9 @@ export default async function WeeklyPopularPollList() {
   const fetchedPollList = await GETPollList();
 
   return (
-    <div className="bg-white mb-4">
+    <div className="mb-4 bg-white">
       <Title text="이번 주의 인기 투표" />
-      <div className="overflow-auto whitespace-nowrap mt-4">
+      <div className="mt-4 overflow-auto whitespace-nowrap">
         {fetchedPollList &&
           fetchedPollList.map((ele) => {
             const {
@@ -61,7 +61,7 @@ export default async function WeeklyPopularPollList() {
               votePercentage,
             } = ele;
             return (
-              <div className="inline-block w-32 text-start mr-4" key={pollId}>
+              <div className="mr-4 inline-block w-32 text-start" key={pollId}>
                 <Link href={`/poll/${pollId}`}>
                   <BookThumbnail
                     width={128}
@@ -73,10 +73,10 @@ export default async function WeeklyPopularPollList() {
                     <ColoredCircle width={20} percentage={100} />
                     <span className="body2-emphasis">{votePercentage}%</span>
                   </div>
-                  <div className="body1 overflow-hidden whitespace-nowrap overflow-ellipsis h-6 pt-1">
+                  <div className="body1 h-6 overflow-hidden overflow-ellipsis whitespace-nowrap pt-1">
                     {title}
                   </div>
-                  <div className="body2 overflow-hidden whitespace-nowrap overflow-ellipsis text-[#757575] mb-7">
+                  <div className="body2 mb-7 overflow-hidden overflow-ellipsis whitespace-nowrap text-[#757575]">
                     {authorList &&
                       authorList.map((author, idx) => {
                         return <span key={`${author}-${idx}`}>{author}</span>;
