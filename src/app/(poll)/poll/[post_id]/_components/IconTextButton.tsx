@@ -37,17 +37,3 @@ export default function IconTextButton({
     </button>
   );
 }
-
-// outline: {
-//   default:
-//     "bg-white text-gray-500 border border-gray-300 active:bg-green-50 hover:border-green-500 hover:text-green-500",
-//   active: "bg-green-50 border border-green-500 text-green-500",
-//   disabled: "bg-gray-100 border border-grey-300 text-grey-500",
-// },
-
-//     outline: {
-//   default:
-//     "bg-white text-gray-500 border border-gray-300 active:bg-yellow-50 hover:border-yellow-500 hover:text-yellow-500",
-//   active: "bg-yellow-50 border border-yellow-500 text-yellow-500",
-//   disabled: "bg-gray-100 border border-grey-300 text-grey-500",
-// },
