@@ -28,7 +28,7 @@ export default function IconTextButton({
       )}
     >
       <Icon
-        name={type === "good" ? "leaf" : "grass/bad"}
+        name={type === "good" ? "grass/leaf-fresh" : "grass/leaf-rotten"}
         alt={`${type}-icon`}
         width={24}
         height={24}
