@@ -1,8 +1,8 @@
 import Title from "./Title";
-import ColoredCircle from "@/components/common/ColoredCircle";
 import { fetchAPI } from "@/apis/route";
 import Link from "next/link";
 import BookThumbnail from "@/components/common/BookThumbnail";
+import VoteViewCount from "@/components/common/VoteViewCount";
 
 interface GETPollListResponse {
   poll_list: {
@@ -45,9 +45,9 @@ export default async function WeeklyPopularPollList() {
   const fetchedPollList = await GETPollList();
 
   return (
-    <div className="mb-4 bg-white">
+    <div className="bg-white py-4">
       <Title text="이번 주의 인기 투표" />
-      <div className="mt-4 overflow-auto whitespace-nowrap">
+      <div className="overflow-auto whitespace-nowrap py-4">
         {fetchedPollList &&
           fetchedPollList.map((ele) => {
             const {
@@ -61,34 +61,31 @@ export default async function WeeklyPopularPollList() {
               votePercentage,
             } = ele;
             return (
-              <div className="mr-4 inline-block w-32 text-start" key={pollId}>
+              <div
+                className="mr-4 inline-block w-32 gap-2 text-start"
+                key={pollId}
+              >
                 <Link href={`/poll/${pollId}`}>
                   <BookThumbnail
                     width={128}
                     height={184}
                     alt={`book-cover-${title}`}
                     src={cover}
+                    fixHeight
                   />
-                  <div className="flex">
-                    <ColoredCircle width={20} percentage={100} />
-                    <span className="body2-emphasis">{votePercentage}%</span>
-                  </div>
-                  <div className="body1 h-6 overflow-hidden overflow-ellipsis whitespace-nowrap pt-1">
+                  <div className="body2 mt-2 line-clamp-2 h-9 whitespace-normal">
                     {title}
                   </div>
-                  <div className="body2 mb-7 overflow-hidden overflow-ellipsis whitespace-nowrap text-[#757575]">
+                  <div className="caption overflow-hidden overflow-ellipsis whitespace-nowrap pt-2 text-grey-700">
                     {authorList &&
                       authorList.map((author, idx) => {
                         return <span key={`${author}-${idx}`}>{author}</span>;
                       })}
-                    <span>{" ∙ "}</span>
-                    <span>{publisher}</span>
                   </div>
-                  <div className="caption text-[#757575]">
-                    <span>투표 {voteCount}</span>
-                    <span>{" ∙ "}</span>
-                    <span>의견 {optionCount}</span>
-                  </div>
+                  <VoteViewCount
+                    votePercentage={votePercentage}
+                    viewCount={voteCount}
+                  />
                 </Link>
               </div>
             );
