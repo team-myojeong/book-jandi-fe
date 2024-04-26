@@ -5,13 +5,21 @@ interface BookThumbnailProps {
   alt: string;
   width: number;
   height: number;
+  fixWidth?: boolean;
+  fixHeight?: boolean;
 }
 export default function BookThumbnail({
   src,
   alt,
   width,
   height,
+  fixWidth = false,
+  fixHeight = false,
 }: BookThumbnailProps) {
+  const fixWidthStyle = fixWidth ? { width: `${width}px`, height: "auto" } : {};
+  const fixHeightStyle = fixHeight
+    ? { height: `${height}px`, width: "auto" }
+    : {};
   return (
     <Image
       priority
@@ -20,7 +28,7 @@ export default function BookThumbnail({
       className="rounded-lg border border-gray-300"
       alt={alt}
       src={src}
-      style={{ height: `${height}px`, width: "auto" }}
+      style={{ ...fixWidthStyle, ...fixHeightStyle }}
     />
   );
 }
