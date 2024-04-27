@@ -65,7 +65,7 @@ export default function Button({
     <button
       disabled={isDisabled}
       className={cn(
-        `w-full whitespace-pre rounded-lg transition ease-linear ${CSS_CONFIG[color][type][state]}`,
+        `w-full whitespace-pre rounded-lg align-middle transition ease-linear ${CSS_CONFIG[color][type][state]}`,
         size === "L" && "title2 px-4 py-3",
         size === "M" && "body1-emphasis px-4 py-2",
         size === "S" && "body2 px-4 py-[10px]",

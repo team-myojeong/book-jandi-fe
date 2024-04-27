@@ -1,8 +1,7 @@
-import Title from "./Title";
-import ColoredCircle from "@/components/common/ColoredCircle";
 import { fetchAPI } from "@/apis/route";
 import Link from "next/link";
 import BookThumbnail from "@/components/common/BookThumbnail";
+import VoteViewCount from "@/components/common/VoteViewCount";
 
 interface GETPollListResponse {
   poll_list: {
@@ -19,7 +18,7 @@ interface GETPollListResponse {
 async function GETPollList() {
   try {
     const data = await fetchAPI<GETPollListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`,
     );
 
     return data.poll_list.map((ele) => {
@@ -38,7 +37,7 @@ async function GETPollList() {
   }
 }
 
-export default async function NewestPollList() {
+export async function NewestPollList() {
   const fetchedPollList = await GETPollList();
 
   const summaryList = (list: string[]) => {
@@ -49,7 +48,7 @@ export default async function NewestPollList() {
 
   return (
     <div className="bg-white">
-      <Title text="새로 올라온 투표" />
+      {/* <Title text="새로 올라온 투표" /> */}
       {fetchedPollList &&
         fetchedPollList.map((ele) => {
           const {
@@ -63,33 +62,32 @@ export default async function NewestPollList() {
           } = ele;
           return (
             <Link href={`/poll/${pollId}`} key={pollId}>
-              <div className="flex h-[133px] w-full gap-4 mt-4">
+              <div className="mt-4 flex h-[133px] w-full gap-4">
                 <BookThumbnail
                   width={93}
                   height={133}
                   alt={`book-cover-${title}`}
                   src={cover}
+                  fixWidth
                 />
-                <div className="text-start flex flex-col justify-center ">
-                  <span className="body1">{title}</span>
-                  <div className="text-[#757575] mb-3">
-                    <span className="caption">
-                      저자 {summaryList(authorList)}
-                    </span>
-                    <span>{" ∙ "}</span>
-                    <span className="caption">
-                      번역 {summaryList(translatorList)}
-                    </span>
+                <div className="flex flex-col justify-between py-4 text-start ">
+                  <span className="body2-emphasis line-clamp-2 whitespace-normal">
+                    {title}
+                  </span>
+                  <div className="mb-3 text-[#757575]">
+                    <span className="caption">{summaryList(authorList)}</span>
                     <span>{" ∙ "}</span>
                     <span className="caption">{publisher}</span>
                   </div>
                   <div className="flex">
-                    <ColoredCircle width={20} percentage={100} />
-                    <span className="body2">{votePercentage}%</span>
+                    <VoteViewCount
+                      viewCount={votePercentage}
+                      votePercentage={votePercentage}
+                    />
                   </div>
                 </div>
               </div>
-              <hr className="h-[0.063rem] border-[#D9D9D9] mt-2" />
+              <hr className="mt-2 h-[0.063rem] border-[#D9D9D9]" />
             </Link>
           );
         })}

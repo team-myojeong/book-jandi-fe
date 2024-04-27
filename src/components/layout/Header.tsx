@@ -32,7 +32,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
   const router = useRouter();
   return (
     <HeaderWrapper>
-      <div className="flex">
+      <div className="flex gap-4">
         <IconButton
           name="hamburger"
           alt="drawer-open-button"
@@ -40,7 +40,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
         />
         <LogoButton />
       </div>
-      <div className="flex">
+      <div className="flex gap-4">
         <IconButton
           name="magnifier"
           alt="search-button"
@@ -53,6 +53,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
               color="green"
               state="default"
               size="S"
+              className="py-auto h-[34px]"
               onClick={() => router.push("/welcome")}
             />
           </div>
@@ -102,7 +103,7 @@ export function HeaderWithIcons({
 }) {
   return (
     <HeaderWrapper bottomBorder={hasBorder ? "detail-page" : undefined}>
-      <div>
+      <div className="flex gap-4">
         {isLeftIconLogo && <LogoButton />}
         {!isLeftIconLogo && leftIcon && (
           <IconButton
