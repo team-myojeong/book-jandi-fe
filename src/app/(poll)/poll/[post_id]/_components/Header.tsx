@@ -18,7 +18,7 @@ export default function Header({
       hasBorder
       leftIcon={{
         icon: "arrow/left",
-        onClick: () => router.push("/welcome"),
+        onClick: () => router.back(),
       }}
       rightIcons={[
         {
