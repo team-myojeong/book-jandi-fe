@@ -17,7 +17,7 @@ export default function BookSection({
       />
       <div className="flex flex-col gap-1 pt-2 text-start">
         <span className="title2">{poll.title}</span>
-        <span className="body2">
+        <span className="body2 text-grey-700">
           {poll.author_list.reduce((prev, ele) => {
             return `${prev}, ${ele}`;
           })}
@@ -26,7 +26,7 @@ export default function BookSection({
             return `${prev}, ${ele}`;
           })}
         </span>
-        <span className="body2">{poll.publisher}</span>
+        <span className="body2 text-grey-700">{poll.publisher}</span>
       </div>
     </div>
   );

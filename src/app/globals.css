@@ -62,7 +62,7 @@ body {
 
 .body2 {
   font-family: var(--font-pretendard);
-  font-size: 1rem;
+  font-size: 0.813rem;
   line-height: 1.125rem;
   font-weight: 500;
 }

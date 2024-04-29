@@ -18,9 +18,9 @@ export function HeaderWrapper({
     <header
       className={cn(
         "fixed left-0 right-0 top-0 z-10 mx-auto flex h-15 max-w-[500px] items-center justify-between bg-white px-4",
-        bottomBorder === "search" && "border-b-2 border-gray-300",
+        bottomBorder === "search" && "border-b-2 border-grey-300",
         bottomBorder === "search-active" && "border-b-2 border-green-500",
-        bottomBorder === "detail-page" && "border-b border-gray-300",
+        bottomBorder === "detail-page" && "border-b border-grey-300",
       )}
     >
       {children}

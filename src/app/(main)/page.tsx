@@ -9,7 +9,7 @@ export default function Main() {
     <>
       <Header />
       <WeeklyPopularPollList />
-      <div className="-ml-4 h-4 w-screen max-w-[500px] bg-gray-100" />
+      <div className="-ml-4 h-4 w-screen max-w-[500px] bg-grey-100" />
       <div className="flex flex-col py-4">
         <Title text="새로 올라온 투표" />
         <NewestPollList />

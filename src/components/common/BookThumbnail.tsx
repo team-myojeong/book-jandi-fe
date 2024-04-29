@@ -25,7 +25,7 @@ export default function BookThumbnail({
       priority
       width={width}
       height={height}
-      className="rounded-lg border border-gray-300"
+      className="rounded-lg border border-grey-300"
       alt={alt}
       src={src}
       style={{ ...fixWidthStyle, ...fixHeightStyle }}
