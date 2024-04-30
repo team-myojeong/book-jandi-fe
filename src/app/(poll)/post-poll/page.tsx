@@ -1,6 +1,6 @@
 "use client";
 
-import { POSTSignUp } from "@/actions/poll.action";
+import { POSTPollPost } from "@/actions/poll.action";
 import Button from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
@@ -50,7 +50,7 @@ export default function Page() {
         translator_list,
         isbn,
       };
-      const postId = await POSTSignUp({ ...pollForm, book });
+      const postId = await POSTPollPost({ ...pollForm, book });
       router.push(`/poll/${postId}`);
     }
   };
