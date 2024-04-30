@@ -324,4 +324,23 @@ export const handlers = [
     }
     return HttpResponse.json(POLL_POST_DATA);
   }),
+  http.post(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote`,
+    async ({ request }) => {
+      type TRequestBody = {
+        id: number;
+        grass: "green" | "dried";
+        contents?: string;
+      };
+      const newVote = await request.json();
+      const pollVoteRequestBody = newVote as TRequestBody;
+      const isValidRequestBody =
+        !!pollVoteRequestBody.id && !!pollVoteRequestBody.grass;
+
+      if (isValidRequestBody) {
+        return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
+      }
+      return HttpResponse.json({ id: -1 }, { status: 400 });
+    },
+  ),
 ];

@@ -18,7 +18,7 @@ interface POSTPollResponse {
   id: number;
 }
 
-export async function POSTSignUp(requestBody: PostForm) {
+export async function POSTPollPost(requestBody: PostForm) {
   try {
     const result = await fetchAPI<POSTPollResponse>(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
@@ -26,7 +26,7 @@ export async function POSTSignUp(requestBody: PostForm) {
       "json",
       {
         ...requestBody,
-      }
+      },
     );
     return result.id;
   } catch (error) {
