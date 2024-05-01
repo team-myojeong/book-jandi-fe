@@ -4,9 +4,21 @@ import Button from "@/components/common/Button";
 import IconTextButton from "./IconTextButton";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
+import { POSTPollVote } from "@/actions/vote.action";
+import { useParams } from "next/navigation";
 
 export default function VoteSection() {
+  const { post_id } = useParams();
   const [selected, setSelected] = useState<"good" | "bad" | null>(null);
+  const [contents, setContents] = useState<string>("");
+
+  const onSubmitVote = async () => {
+    await POSTPollVote({
+      id: +post_id,
+      grass: selected === "good" ? "green" : "dried",
+      contents,
+    });
+  };
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl bg-white px-4 py-8">
@@ -45,8 +57,15 @@ export default function VoteSection() {
           selected === "bad" && "outline-yellow-500",
         )}
         placeholder="선택사항이지만 당신의 더 상세한 의견을 입력해주신다면 작성자에게 큰 도움이 될 거에요!"
+        value={contents}
+        onChange={(e) => setContents(e.target.value)}
       />
-      <Button color="green" state="default" text="투표하기" />
+      <Button
+        color="green"
+        state="default"
+        text="투표하기"
+        onClick={onSubmitVote}
+      />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import VoteSection from "./_components/VoteSection";
 import BookSection from "./_components/BookSection";
 import PollWriterSection from "./_components/PollWriterSection";
 import PollDetailSection from "./_components/PollDetailSection";
+import VoteResult from "./_components/VoteResult";
 
 export default async function Page({
   params,
@@ -23,6 +24,7 @@ export default async function Page({
       <PollWriterSection writerInfo={writer_info} />
       <PollDetailSection poll={poll} />
       {vote === "none" && <VoteSection />}
+      {vote !== "none" && <VoteResult />}
     </>
   );
 }
