@@ -338,9 +338,9 @@ export const handlers = [
         !!pollVoteRequestBody.id && !!pollVoteRequestBody.grass;
 
       if (isValidRequestBody) {
-        return HttpResponse.json({ id: Math.floor(Math.random() * 100) + 1 });
+        return HttpResponse.json({ success: true });
       }
-      return HttpResponse.json({ id: -1 }, { status: 400 });
+      return HttpResponse.json({ success: false });
     },
   ),
 ];

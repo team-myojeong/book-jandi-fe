@@ -1,4 +1,5 @@
 import { fetchAPI } from "@/apis/route";
+import { revalidatePath } from "next/cache";
 
 export interface VoteForm {
   id: number;
@@ -7,12 +8,12 @@ export interface VoteForm {
 }
 
 interface POSTPollResponse {
-  id: number;
+  success: boolean;
 }
 
 export async function POSTPollVote(requestBody: VoteForm) {
   try {
-    const result = await fetchAPI<POSTPollResponse>(
+    await fetchAPI<POSTPollResponse>(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote`,
       "POST",
       "json",
@@ -20,7 +21,7 @@ export async function POSTPollVote(requestBody: VoteForm) {
         ...requestBody,
       },
     );
-    return result.id;
+    revalidatePath(`/poll/${requestBody.id}`);
   } catch (error) {
     console.error("Fail to fetch data:", error);
   }
