@@ -1,3 +1,4 @@
+"use server";
 import { fetchAPI } from "@/apis/route";
 
 export interface PostForm {

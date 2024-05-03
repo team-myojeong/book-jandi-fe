@@ -240,9 +240,39 @@ const POLL_POST_DATA = {
     job: "프론트엔드",
     career: "1-3년",
   },
-  vote: "none",
+  vote: "green",
   is_bookmark: false,
   is_mine: false,
+};
+
+const POLL_VOTE_DETAIL_DATA = {
+  green_percentage: 61,
+  dried_percentage: 39,
+  total: {
+    vote_count: 1000,
+    green_count: 610,
+    dried_count: 390,
+    green_opinion_count: 234,
+    dried_opinion_count: 123,
+    ranking: {
+      top_career: "1년-3년",
+      top_job: "프론트엔드",
+      detail: [
+        {
+          job: "프론트엔드",
+          percentage: [12, 38, 0, 50, 0],
+        },
+        {
+          job: "백엔드",
+          percentage: [34, 1, 39, 6, 20],
+        },
+        {
+          job: "풀스택",
+          percentage: [0, 0, 0, 0, 100],
+        },
+      ],
+    },
+  },
 };
 
 export const handlers = [
@@ -343,22 +373,16 @@ export const handlers = [
       return HttpResponse.json({ success: false });
     },
   ),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`, () => {
-    return HttpResponse.json({ poll_list: WEEKLY_POPULAR_POLL_DATA });
-  }),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`, () => {
-    return HttpResponse.json({ poll_list: NEWEST_POLL_DATA });
-  }),
   http.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/book/search`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote/detail`,
     ({ request }) => {
       const url = new URL(request.url);
-      const keyword = url.searchParams.get("keyword");
+      const id = url.searchParams.get("id");
 
-      if (!keyword) {
+      if (!id) {
         return new HttpResponse(null, { status: 404 });
       }
-      return HttpResponse.json({ book_list: SEARCH_DATA });
+      return HttpResponse.json(POLL_VOTE_DETAIL_DATA);
     },
   ),
 ];
