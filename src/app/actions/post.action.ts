@@ -20,7 +20,7 @@ export interface GETPollPostResponse {
     job: string;
     career: string;
   };
-  vote: string;
+  vote: "none" | "green" | "dried";
   is_bookmark: boolean;
   is_mine: boolean;
 }

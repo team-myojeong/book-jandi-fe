@@ -7,7 +7,7 @@ export function Icon({
   height = 24,
 }: {
   name: IconType;
-  alt: string;
+  alt?: string;
   width?: number;
   height?: number;
 }) {
@@ -15,9 +15,11 @@ export function Icon({
     <Image
       priority
       src={`/icons/${name}.svg`}
-      alt={alt}
+      // TODO: 사용하는 alt 이름 정리
+      alt={`${alt}-icon`}
       width={width}
       height={height}
+      style={{ height: "100%" }}
     />
   );
 }
