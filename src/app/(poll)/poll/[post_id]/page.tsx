@@ -24,7 +24,7 @@ export default async function Page({
       <PollWriterSection writerInfo={writer_info} />
       <PollDetailSection poll={poll} />
       {vote === "none" && <VoteSection />}
-      {vote !== "none" && <VoteResult />}
+      {vote !== "none" && <VoteResult id={postId} myVote={vote} />}
     </>
   );
 }
