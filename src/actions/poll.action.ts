@@ -22,7 +22,7 @@ interface POSTPollResponse {
 export async function POSTPollPost(requestBody: PostForm) {
   try {
     const result = await fetchAPI<POSTPollResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll`,
       "POST",
       "json",
       {

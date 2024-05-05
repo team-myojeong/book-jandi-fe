@@ -10,7 +10,7 @@ interface GETBookSearchResponse {
 export async function GETBookByKeyword(keyword: string) {
   try {
     const data = await fetchAPI<GETBookSearchResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/book/search?keyword=${keyword}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/book/search?keyword=${keyword}`,
     );
     return data.book_list;
   } catch (error) {
