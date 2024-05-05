@@ -276,14 +276,14 @@ const POLL_VOTE_DETAIL_DATA = {
 };
 
 export const handlers = [
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`, () => {
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/job`, () => {
     return HttpResponse.json({ job_list: JOBS_DATA });
   }),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/career`, () => {
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/career`, () => {
     return HttpResponse.json({ career_list: CAREER_DATA });
   }),
   http.post(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/signup`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/signup`,
     async ({ request }) => {
       type TRequestBody = { job_id: number; career_id: number };
       const newUser = await request.json();
@@ -294,14 +294,14 @@ export const handlers = [
       return HttpResponse.json({ success: false });
     },
   ),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`, () => {
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/poll/popular`, () => {
     return HttpResponse.json({ poll_list: WEEKLY_POPULAR_POLL_DATA });
   }),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`, () => {
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/poll/recent`, () => {
     return HttpResponse.json({ poll_list: NEWEST_POLL_DATA });
   }),
   http.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/book/search`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/book/search`,
     ({ request }) => {
       const url = new URL(request.url);
       const keyword = url.searchParams.get("keyword");
@@ -313,7 +313,7 @@ export const handlers = [
     },
   ),
   http.post(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/poll`,
     async ({ request }) => {
       type TRequestBody = {
         difficulty_level: 1 | 2 | 3;
@@ -345,7 +345,7 @@ export const handlers = [
       return HttpResponse.json({ id: -1 }, { status: 400 });
     },
   ),
-  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll`, ({ request }) => {
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/poll`, ({ request }) => {
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
 
@@ -355,7 +355,7 @@ export const handlers = [
     return HttpResponse.json(POLL_POST_DATA);
   }),
   http.post(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote`,
     async ({ request }) => {
       type TRequestBody = {
         id: number;
@@ -374,7 +374,7 @@ export const handlers = [
     },
   ),
   http.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote/detail`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote/detail`,
     ({ request }) => {
       const url = new URL(request.url);
       const id = url.searchParams.get("id");

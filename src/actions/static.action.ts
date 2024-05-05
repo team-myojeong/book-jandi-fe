@@ -11,7 +11,7 @@ interface GETJobListResponse {
 export async function GETJobList() {
   try {
     const data = await fetchAPI<GETJobListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/job`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/job`,
     );
     return data.job_list.map((ele) => {
       return { jobId: ele.job_id, jobText: ele.job_text, isSelected: false };
@@ -30,7 +30,7 @@ interface GETCareerListResponse {
 export async function GETCareerList() {
   try {
     const data = await fetchAPI<GETCareerListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/career`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/career`,
     );
     return data.career_list.map((ele) => {
       return {
