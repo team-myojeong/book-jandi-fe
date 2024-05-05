@@ -28,7 +28,7 @@ export interface GETPollPostResponse {
 export async function GETPollPost(id: number) {
   try {
     const data = await fetchAPI<GETPollPostResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll?id=${id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll?id=${id}`,
     );
     return data;
   } catch (error) {

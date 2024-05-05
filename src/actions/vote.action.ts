@@ -15,7 +15,7 @@ interface POSTPollResponse {
 export async function POSTPollVote(requestBody: VoteForm) {
   try {
     await fetchAPI<POSTPollResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote`,
       "POST",
       "json",
       {
@@ -52,7 +52,7 @@ interface GETVoteDetailResponse {
 export async function GETVoteDetail(id: number) {
   try {
     const response = await fetchAPI<GETVoteDetailResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/vote/detail?id=${id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote/detail?id=${id}`,
       "GET",
       "json",
     );

@@ -21,7 +21,7 @@ interface GETPollListResponse {
 async function GETPollList() {
   try {
     const data = await fetchAPI<GETPollListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/popular`,
     );
     return data.poll_list.map((ele) => {
       return {

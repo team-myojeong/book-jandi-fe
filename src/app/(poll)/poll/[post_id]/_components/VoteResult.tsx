@@ -5,6 +5,7 @@ import { cn } from "@/utils/cn";
 import { GETCareerList } from "@/actions/static.action";
 import Image from "next/image";
 import Button from "@/components/common/Button";
+import { MOCK_POLL_VOTE_DETAIL_DATA } from "@/lib/constant";
 
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -104,8 +105,11 @@ export default async function VoteResult({
   id: number;
   myVote: "green" | "dried";
 }) {
+  const HIDE_DATA = true;
   const voteDetail = await GETVoteDetail(id);
-  const { green_percentage, dried_percentage, total } = voteDetail!;
+  const { green_percentage, dried_percentage, total } = HIDE_DATA
+    ? MOCK_POLL_VOTE_DETAIL_DATA
+    : voteDetail!;
   const {
     vote_count,
     green_count,
@@ -117,7 +121,6 @@ export default async function VoteResult({
 
   const careerList = await GETCareerList();
 
-  const HIDE_DATA = false;
   return (
     <div className="relative">
       {HIDE_DATA && (
