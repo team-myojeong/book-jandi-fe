@@ -23,8 +23,8 @@ export default async function Page({
       <Divider />
       <PollWriterSection writerInfo={writer_info} />
       <PollDetailSection poll={poll} />
-      {vote === "none" && <VoteSection />}
-      {vote !== "none" && <VoteResult id={postId} myVote={vote} />}
+      {vote == "none" && <VoteSection />}
+      {vote !== "none" && <VoteResult id={postId} myVote={"green"} />}
     </>
   );
 }
