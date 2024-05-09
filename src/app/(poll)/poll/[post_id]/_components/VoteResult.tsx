@@ -107,9 +107,10 @@ export default async function VoteResult({
 }) {
   const HIDE_DATA = false;
   const voteDetail = await GETVoteDetail(id);
-  console.log("voteDetail", voteDetail, id);
+
   if (!voteDetail) return null;
-  const { green_percentage, dried_percentage, total } = HIDE_DATA
+
+  const { green_percentage, dried_percentage, total, ranking } = HIDE_DATA
     ? MOCK_POLL_VOTE_DETAIL_DATA
     : voteDetail!;
   const {
@@ -118,7 +119,6 @@ export default async function VoteResult({
     dried_count,
     green_opinion_count,
     dried_opinion_count,
-    ranking,
   } = total;
 
   const careerList = await GETCareerList();
