@@ -38,14 +38,14 @@ interface GETVoteDetailResponse {
     dried_count: number;
     green_opinion_count: number;
     dried_opinion_count: number;
-    ranking: {
-      top_career: string;
-      top_job: string;
-      detail: {
-        job: string;
-        percentage: number[];
-      }[];
-    };
+  };
+  ranking: {
+    top_career: string;
+    top_job: string;
+    detail: {
+      job: string;
+      percentage: number[];
+    }[];
   };
 }
 
