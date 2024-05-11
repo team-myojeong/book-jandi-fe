@@ -29,7 +29,13 @@ export function HeaderWrapper({
   );
 }
 
-export function Header({ isLogin = false }: { isLogin?: boolean }) {
+export function Header({
+  isLogin = false,
+  isWelcomePage = false,
+}: {
+  isLogin?: boolean;
+  isWelcomePage?: boolean;
+}) {
   const router = useRouter();
   return (
     <HeaderWrapper>
@@ -37,27 +43,29 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
         <DrawerTemplate />
         <LogoButton />
       </div>
-      <div className="flex gap-4">
-        <IconButton
-          name="magnifier"
-          alt="search-button"
-          onClick={() => router.push("/search")}
-        />
-        {!isLogin ? (
-          <div className="h-9.5">
-            <Button
-              text="회원가입/로그인"
-              color="green"
-              state="default"
-              size="S"
-              className="py-auto h-[34px]"
-              onClick={() => router.push("/welcome")}
-            />
-          </div>
-        ) : (
-          <Avatar src="" size={32} />
-        )}
-      </div>
+      {!isWelcomePage && (
+        <div className="flex gap-4">
+          <IconButton
+            name="magnifier"
+            alt="search-button"
+            onClick={() => router.push("/search")}
+          />
+          {!isLogin ? (
+            <div className="h-9.5">
+              <Button
+                text="회원가입/로그인"
+                color="green"
+                state="default"
+                size="S"
+                className="py-auto h-[34px]"
+                onClick={() => router.push("/welcome")}
+              />
+            </div>
+          ) : (
+            <Avatar src="" size={32} />
+          )}
+        </div>
+      )}
     </HeaderWrapper>
   );
 }
