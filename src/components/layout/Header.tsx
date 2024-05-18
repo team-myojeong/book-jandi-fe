@@ -6,6 +6,7 @@ import Button from "@/components/common/Button";
 import Avatar from "@/components/common/Avatar";
 import { useRouter } from "next/navigation";
 import { cn } from "@/utils/cn";
+import { DrawerTemplate } from "./DrawerTemplate";
 
 export function HeaderWrapper({
   bottomBorder,
@@ -33,11 +34,7 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
   return (
     <HeaderWrapper>
       <div className="flex gap-4">
-        <IconButton
-          name="hamburger"
-          alt="drawer-open-button"
-          onClick={() => console.log("drawer")}
-        />
+        <DrawerTemplate />
         <LogoButton />
       </div>
       <div className="flex gap-4">
@@ -70,14 +67,15 @@ export function HeaderWithSingleArrow({
   onClickLeftArrow,
 }: {
   title: string;
-  onClickLeftArrow: () => void;
+  onClickLeftArrow?: () => void;
 }) {
+  const router = useRouter();
   return (
     <HeaderWrapper>
       <IconButton
         name="arrow/left"
         alt="back-button"
-        onClick={onClickLeftArrow}
+        onClick={onClickLeftArrow ? onClickLeftArrow : () => router.back()}
       />
       <span className="text-lg font-semibold">{title}</span>
       <div className="invisible h-6 w-6" />
