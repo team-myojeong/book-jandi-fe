@@ -17,21 +17,21 @@ export default function SearchItem<T extends BookSearchDTO>({
   const iconName = isFromPostPage
     ? "check"
     : !selectedBook
-    ? "document/add"
-    : "document/edit";
+      ? "document/add-gray"
+      : "document/edit";
   return (
     <div className="flex justify-between p-4">
-      <div className="flex-1 flex">
+      <div className="flex flex-1">
         <BookThumbnail
           width={64}
           height={80}
           alt={`book-cover-${data.isbn}`}
           src={data.cover}
         />
-        <div className="text-start flex flex-col justify-between ml-3">
+        <div className="ml-3 flex flex-col justify-between text-start">
           <div>
             <div className="body2-emphasis">{data.title}</div>
-            <div className="flex body2 text-grey-700 gap-1 ">
+            <div className="body2 flex gap-1 text-grey-700 ">
               <div>
                 {summaryAuthors(data.author_list)}
                 {" ("}
@@ -47,7 +47,7 @@ export default function SearchItem<T extends BookSearchDTO>({
       </div>
       <div className="flex items-center">
         <button
-          className="w-8 h-8 border rounded-full border-grey-500 flex justify-center items-center flex-none"
+          className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-grey-500"
           onClick={() => onClickRouteToAddPost(data)}
         >
           <Icon name={iconName} alt="add-poll-post" width={16} height={16} />

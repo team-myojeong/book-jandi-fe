@@ -6,7 +6,7 @@ import SearchItem from "./SearchItem";
 
 export default function SearchContents() {
   const { fetchedData, isEmptyKeyword, setSelectedBook } = useBookStore(
-    (state) => state
+    (state) => state,
   );
   const router = useRouter();
 

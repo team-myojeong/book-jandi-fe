@@ -343,4 +343,22 @@ export const handlers = [
       return HttpResponse.json({ success: false });
     },
   ),
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`, () => {
+    return HttpResponse.json({ poll_list: WEEKLY_POPULAR_POLL_DATA });
+  }),
+  http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/recent`, () => {
+    return HttpResponse.json({ poll_list: NEWEST_POLL_DATA });
+  }),
+  http.get(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/book/search`,
+    ({ request }) => {
+      const url = new URL(request.url);
+      const keyword = url.searchParams.get("keyword");
+
+      if (!keyword) {
+        return new HttpResponse(null, { status: 404 });
+      }
+      return HttpResponse.json({ book_list: SEARCH_DATA });
+    },
+  ),
 ];
