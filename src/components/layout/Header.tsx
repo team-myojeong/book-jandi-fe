@@ -4,19 +4,35 @@ import LogoButton from "@/components/common/LogoButton";
 import IconButton from "@/components/common/IconButton";
 import Button from "@/components/common/Button";
 import Avatar from "@/components/common/Avatar";
+import { useRouter } from "next/navigation";
+import { cn } from "@/utils/cn";
 
-export function HeaderWrapper({ children }: { children: React.ReactNode }) {
+export function HeaderWrapper({
+  bottomBorder,
+  children,
+}: {
+  bottomBorder?: "search" | "search-active" | "detail-page";
+  children: React.ReactNode;
+}) {
   return (
-    <header className="fixed top-0 left-0 right-0 max-w-[500px] mx-auto h-15 z-10 px-4 flex justify-between items-center bg-white">
+    <header
+      className={cn(
+        "fixed left-0 right-0 top-0 z-10 mx-auto flex h-15 max-w-[500px] items-center justify-between bg-white px-4",
+        bottomBorder === "search" && "border-b-2 border-grey-300",
+        bottomBorder === "search-active" && "border-b-2 border-green-500",
+        bottomBorder === "detail-page" && "border-b border-grey-300",
+      )}
+    >
       {children}
     </header>
   );
 }
 
 export function Header({ isLogin = false }: { isLogin?: boolean }) {
+  const router = useRouter();
   return (
     <HeaderWrapper>
-      <div className="flex">
+      <div className="flex gap-4">
         <IconButton
           name="hamburger"
           alt="drawer-open-button"
@@ -24,19 +40,21 @@ export function Header({ isLogin = false }: { isLogin?: boolean }) {
         />
         <LogoButton />
       </div>
-      <div className="flex">
+      <div className="flex gap-4">
         <IconButton
           name="magnifier"
           alt="search-button"
-          onClick={() => console.log("검색")}
+          onClick={() => router.push("/search")}
         />
         {!isLogin ? (
           <div className="h-9.5">
             <Button
+              text="회원가입/로그인"
               color="green"
               state="default"
-              text="회원가입/로그인"
-              onClick={() => console.log("회원가입/로그인 버튼")}
+              size="S"
+              className="py-auto h-[34px]"
+              onClick={() => router.push("/welcome")}
             />
           </div>
         ) : (
@@ -61,8 +79,8 @@ export function HeaderWithSingleArrow({
         alt="back-button"
         onClick={onClickLeftArrow}
       />
-      <span className="font-semibold text-lg">{title}</span>
-      <div className="w-6 h-6 invisible" />
+      <span className="text-lg font-semibold">{title}</span>
+      <div className="invisible h-6 w-6" />
     </HeaderWrapper>
   );
 }
@@ -73,17 +91,19 @@ interface IconElement {
 }
 
 export function HeaderWithIcons({
+  hasBorder,
   isLeftIconLogo = false,
   leftIcon,
   rightIcons,
 }: {
+  hasBorder?: boolean;
   isLeftIconLogo?: boolean;
   leftIcon?: IconElement;
   rightIcons: IconElement[];
 }) {
   return (
-    <HeaderWrapper>
-      <div>
+    <HeaderWrapper bottomBorder={hasBorder ? "detail-page" : undefined}>
+      <div className="flex gap-4">
         {isLeftIconLogo && <LogoButton />}
         {!isLeftIconLogo && leftIcon && (
           <IconButton
@@ -93,7 +113,7 @@ export function HeaderWithIcons({
           />
         )}
       </div>
-      <div>
+      <div className="flex gap-4">
         {rightIcons.map((ele, idx) => {
           return (
             <IconButton

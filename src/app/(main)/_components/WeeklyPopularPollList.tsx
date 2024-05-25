@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Title from "./Title";
-import ColoredCircle from "@/components/common/ColoredCircle";
 import { fetchAPI } from "@/apis/route";
 import Link from "next/link";
+import BookThumbnail from "@/components/common/BookThumbnail";
+import VoteViewCount from "@/components/common/VoteViewCount";
 
 interface GETPollListResponse {
   poll_list: {
@@ -21,7 +21,7 @@ interface GETPollListResponse {
 async function GETPollList() {
   try {
     const data = await fetchAPI<GETPollListResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/poll/popular`,
     );
     return data.poll_list.map((ele) => {
       return {
@@ -45,9 +45,9 @@ export default async function WeeklyPopularPollList() {
   const fetchedPollList = await GETPollList();
 
   return (
-    <div className="bg-white mb-4">
+    <div className="bg-white py-4">
       <Title text="이번 주의 인기 투표" />
-      <div className="overflow-auto whitespace-nowrap mt-4">
+      <div className="overflow-auto whitespace-nowrap py-4">
         {fetchedPollList &&
           fetchedPollList.map((ele) => {
             const {
@@ -61,37 +61,31 @@ export default async function WeeklyPopularPollList() {
               votePercentage,
             } = ele;
             return (
-              <div className="inline-block w-32 text-start mr-4" key={pollId}>
+              <div
+                className="mr-4 inline-block w-32 gap-2 text-start"
+                key={pollId}
+              >
                 <Link href={`/poll/${pollId}`}>
-                  <Image
-                    priority
+                  <BookThumbnail
                     width={128}
                     height={184}
-                    className="rounded-lg"
                     alt={`book-cover-${title}`}
                     src={cover}
-                    style={{ width: "8rem", height: "100%" }}
+                    fixHeight
                   />
-                  <div className="flex">
-                    <ColoredCircle width={20} percentage={100} />
-                    <span className="body2-emphasis">{votePercentage}%</span>
-                  </div>
-                  <div className="body1 overflow-hidden whitespace-nowrap overflow-ellipsis h-6 pt-1">
+                  <div className="body2 mt-2 line-clamp-2 h-9 whitespace-normal">
                     {title}
                   </div>
-                  <div className="body2 overflow-hidden whitespace-nowrap overflow-ellipsis text-[#757575] mb-7">
+                  <div className="caption overflow-hidden overflow-ellipsis whitespace-nowrap pt-2 text-grey-700">
                     {authorList &&
                       authorList.map((author, idx) => {
                         return <span key={`${author}-${idx}`}>{author}</span>;
                       })}
-                    <span>{" ∙ "}</span>
-                    <span>{publisher}</span>
                   </div>
-                  <div className="caption text-[#757575]">
-                    <span>투표 {voteCount}</span>
-                    <span>{" ∙ "}</span>
-                    <span>의견 {optionCount}</span>
-                  </div>
+                  <VoteViewCount
+                    votePercentage={votePercentage}
+                    viewCount={voteCount}
+                  />
                 </Link>
               </div>
             );

@@ -1,55 +1,56 @@
 import { summaryAuthors } from "@/app/utils/arrayToString";
 import { Icon } from "../common/Icon";
-import Image from "next/image";
 import { BookSearchDTO } from "@/app/(main)/search/page";
+import { useBookStore } from "@/stores/book-store-provider";
+import BookThumbnail from "../common/BookThumbnail";
 
 export default function SearchItem<T extends BookSearchDTO>({
   data,
-  isFromPostPage,
   onClickRouteToAddPost,
 }: {
   data: T;
-  isFromPostPage: boolean;
   onClickRouteToAddPost: (selected: T) => void;
+  children?: React.ReactNode;
 }) {
+  const { isFromPostPage, selectedBook } = useBookStore((state) => state);
+
+  const iconName = isFromPostPage
+    ? "check"
+    : !selectedBook
+      ? "document/add-gray"
+      : "document/edit";
   return (
     <div className="flex justify-between p-4">
-      <div className="flex-1 flex">
-        <Image
-          alt={`searched-image=${data.isbn}`}
-          src={data.cover}
+      <div className="flex flex-1">
+        <BookThumbnail
           width={64}
           height={80}
-          style={{ height: "auto" }}
+          alt={`book-cover-${data.isbn}`}
+          src={data.cover}
         />
-        <div className="text-start flex flex-col justify-between ml-3">
+        <div className="ml-3 flex flex-col justify-between text-start">
           <div>
             <div className="body2-emphasis">{data.title}</div>
-            <div className="flex body2 text-gray-700 gap-1">
-              <div>{summaryAuthors(data.author_list)}</div>
+            <div className="body2 flex gap-1 text-grey-700 ">
               <div>
-                {"("}
+                {summaryAuthors(data.author_list)}
+                {" ("}
                 {data.publisher}
                 {")"}
               </div>
             </div>
           </div>
-          <div className="body2 text-gray-700">
+          <div className="body2 text-grey-700">
             {data.poll_count}개의 투표글
           </div>
         </div>
       </div>
       <div className="flex items-center">
         <button
-          className="w-8 h-8 border rounded-full border-gray-500 flex justify-center items-center flex-none"
+          className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-grey-500"
           onClick={() => onClickRouteToAddPost(data)}
         >
-          <Icon
-            name={isFromPostPage ? "check" : "document/add"}
-            alt="add-poll-post"
-            width={16}
-            height={16}
-          />
+          <Icon name={iconName} alt="add-poll-post" width={16} height={16} />
         </button>
       </div>
     </div>
