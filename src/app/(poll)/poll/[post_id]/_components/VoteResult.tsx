@@ -105,8 +105,10 @@ export default async function VoteResult({
   id: number;
   myVote: "green" | "dried";
 }) {
-  const HIDE_DATA = true;
+  const HIDE_DATA = false;
   const voteDetail = await GETVoteDetail(id);
+  console.log("voteDetail", voteDetail, id);
+  if (!voteDetail) return null;
   const { green_percentage, dried_percentage, total } = HIDE_DATA
     ? MOCK_POLL_VOTE_DETAIL_DATA
     : voteDetail!;

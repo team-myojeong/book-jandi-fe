@@ -6,17 +6,17 @@ import SearchHeader from "@/components/search/SearchHeader";
 import { useBookStore } from "@/stores/book-store-provider";
 import { Dispatch, SetStateAction, createContext, useEffect } from "react";
 
-export const SearchContext = createContext<
-  SearchContextType<BookSearchDTO> | undefined
->(undefined);
+// const SearchContext = createContext<
+//   SearchContextType<BookSearchDTO> | undefined
+// >(undefined);
 
-type SearchContextType<T> = {
-  isEmptyKeyword: boolean;
-  setIsEmptyKeyword: Dispatch<SetStateAction<boolean>>;
-  fetchedData: T[];
-  onChangeValue: (data: T[]) => void;
-  selectedValue: T | null;
-};
+// type SearchContextType<T> = {
+//   isEmptyKeyword: boolean;
+//   setIsEmptyKeyword: Dispatch<SetStateAction<boolean>>;
+//   fetchedData: T[];
+//   onChangeValue: (data: T[]) => void;
+//   selectedValue: T | null;
+// };
 
 export type BookDTO = {
   title: string;

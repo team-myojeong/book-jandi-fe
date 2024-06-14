@@ -12,7 +12,7 @@ export default function PollWriterSection({
       <Link href={`/profile/${writerInfo.id}`}>
         <Avatar src={writerInfo.profile} size={40} />
       </Link>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 text-start">
         <span className="body1-emphasis">{writerInfo.name}</span>
         <span className="caption">
           {writerInfo.job}
