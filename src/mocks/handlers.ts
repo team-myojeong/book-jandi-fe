@@ -275,6 +275,44 @@ const POLL_VOTE_DETAIL_DATA = {
   },
 };
 
+const POLL_OPINION_DATA = {
+  my_opinion: {
+    id: 1,
+    created_at: "2024.03.12",
+    job: "백엔드",
+    career: "신입",
+    contents: "이 책 보고 취뽀 했습니다~!",
+    name: "개발자1",
+    profile:
+      "https://blog.kakaocdn.net/dn/c77N8x/btry7MnUWU7/K4Zb5nR8VlxbDfkfUhm3G0/img.jpg",
+    writer_id: 1,
+  },
+  opinion_list: [
+    {
+      id: 1,
+      created_at: "2024.03.12",
+      job: "프론트엔드",
+      career: "신입",
+      contents: "이 책 보고 취뽀 했습니다~!",
+      name: "개발자2",
+      profile:
+        "https://www.greenart.co.kr/upimage/new_editor/20212/20210201112403.jpg",
+      writer_id: 2,
+    },
+    {
+      id: 2,
+      created_at: "2024.03.12",
+      job: "풀스택",
+      career: "신입",
+      contents: "이 책 보고 취뽀 했습니다~!",
+      name: "개발자3",
+      profile:
+        "https://www.greenart.co.kr/upimage/new_editor/20212/20210201112403.jpg",
+      writer_id: 3,
+    },
+  ],
+};
+
 export const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/job`, () => {
     return HttpResponse.json({ job_list: JOBS_DATA });
@@ -383,6 +421,37 @@ export const handlers = [
         return new HttpResponse(null, { status: 404 });
       }
       return HttpResponse.json(POLL_VOTE_DETAIL_DATA);
+    },
+  ),
+  http.post(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/opinion`,
+    async ({ request }) => {
+      type TRequestBody = {
+        id: number;
+        contents: string;
+      };
+      const newOpinion = await request.json();
+      const pollOpinionRequestBody = newOpinion as TRequestBody;
+      const isValidRequestBody =
+        !!pollOpinionRequestBody.id && !!pollOpinionRequestBody.contents;
+      if (isValidRequestBody) {
+        return HttpResponse.json({ success: true });
+      }
+      return HttpResponse.json({ success: false });
+    },
+  ),
+  http.get(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/opinion`,
+    ({ request }) => {
+      const url = new URL(request.url);
+      const id = url.searchParams.get("id");
+      const limit = url.searchParams.get("limit");
+      const last = url.searchParams.get("last");
+
+      if (!id || !limit || !last) {
+        return new HttpResponse(null, { status: 404 });
+      }
+      return HttpResponse.json(POLL_OPINION_DATA);
     },
   ),
 ];
