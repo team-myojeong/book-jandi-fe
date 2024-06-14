@@ -3,9 +3,9 @@ import { redirect, useSearchParams } from "next/navigation";
 import { login } from "@/app/(admin)/kakao/actions";
 
 export default function Page() {
-  const searchParams = useSearchParams();
-  const authCode = searchParams.get("code");
-  const kakaoServerError = searchParams.get("error");
+  let params = new URLSearchParams(document.location.search);
+  const authCode = params.get("code");
+  const kakaoServerError = params.get("error");
 
   if (authCode) {
     login(authCode as string).then((res) => {
