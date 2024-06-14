@@ -1,19 +1,11 @@
-"use client";
-import { redirect, useSearchParams } from "next/navigation";
-import { login } from "@/app/(admin)/kakao/actions";
+import { Suspense } from "react";
+import KakaoComponent from "./KakaoComponent";
 
 export default function Page() {
-  let params = new URLSearchParams(document.location.search);
-  const authCode = params.get("code");
-  const kakaoServerError = params.get("error");
-
-  if (authCode) {
-    login(authCode as string).then((res) => {
-      redirect(res);
-    });
-  } else if (kakaoServerError) {
-    redirect("/notifications/authentication-failed");
-  }
   //TODO: 로그인 중 UI
-  return <h2>로그인 중입니다..</h2>;
+  return (
+    <Suspense>
+      <KakaoComponent />
+    </Suspense>
+  );
 }
