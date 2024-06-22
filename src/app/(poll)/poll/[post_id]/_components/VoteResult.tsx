@@ -120,6 +120,7 @@ export default async function VoteResult({
     green_opinion_count,
     dried_opinion_count,
   } = total;
+  const { top_career, top_job, detail } = ranking;
 
   const careerList = await GETCareerList();
 
@@ -202,9 +203,9 @@ export default async function VoteResult({
           <span className="body2 flex items-center gap-1 text-grey-700">
             <Icon name="cat" alt="ranking-icon" width={18} />
             가장 많이 조회한 직군은
-            <CareerJobBadge title={ranking.top_career} />
+            <CareerJobBadge title={top_career} />
             {", "}
-            <CareerJobBadge title={ranking.top_job} />
+            <CareerJobBadge title={top_job} />
           </span>
           <div className="flex items-center gap-2">
             <span className="body2-emphasis">직무 및 연차</span>
@@ -213,7 +214,7 @@ export default async function VoteResult({
             ))}
           </div>
           <div className="flex flex-col gap-2">
-            {ranking?.detail.map(({ job, percentage }, index) => (
+            {detail.map(({ job, percentage }, index) => (
               <CareerDetailItem
                 key={id}
                 index={index + 1}
