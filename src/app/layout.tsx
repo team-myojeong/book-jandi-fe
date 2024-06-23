@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { pretendard } from "./styles/font/fonts";
 import "./globals.css";
-import KakaoScript from "@/app/KakaoScript";
 import { BookStoreProvider } from "@/stores/book-store-provider";
 
 export const metadata: Metadata = {
@@ -19,7 +18,6 @@ export default function RootLayout({
       <body>
         <BookStoreProvider>{children}</BookStoreProvider>
       </body>
-      <KakaoScript />
     </html>
   );
 }
