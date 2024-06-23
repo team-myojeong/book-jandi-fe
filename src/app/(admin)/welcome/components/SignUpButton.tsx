@@ -1,22 +1,20 @@
 "use client";
+
+import { fetchAPI } from "@/apis/route";
 import { Icon } from "@/components/common/Icon";
 
+const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`;
 export default function SignUpButton() {
-  function kakaoLogin() {
-    window.Kakao.Auth.authorize({
-      redirectUri:
-        process.env.NODE_ENV === "development"
-          ? `http://localhost:3000/kakao`
-          : `${process.env.NEXT_PUBLIC_MAIN_URL}`,
-    });
+  async function kakaoLogin() {
+    window.location.href = kakaoURL;
   }
 
   return (
     <button
-      className="bg-[#FEE500] py-4 rounded-xl flex justify-center w-full"
+      className="flex w-full justify-center rounded-xl bg-[#FEE500] py-4"
       onClick={kakaoLogin}
     >
-      <div className="flex justify-between items-center w-[154px]">
+      <div className="flex w-[154px] items-center justify-between">
         <Icon alt="kakao-logo" name="kakao" />
         <span className="body1">카카오로 시작하기</span>
       </div>
