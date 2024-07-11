@@ -15,10 +15,7 @@ export default function Page() {
   }, []);
   return (
     <>
-      <SearchHeader<BookSearchDTO>
-        placeholder="투표할 책 제목 검색"
-        getAPI={async (keyword) => await GETBookByKeyword(keyword)}
-      />
+      <SearchHeader<BookSearchDTO> placeholder="투표할 책 제목 검색" />
       <SearchContents />
       <SearchFooter />
     </>
