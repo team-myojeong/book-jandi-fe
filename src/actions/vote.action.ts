@@ -15,7 +15,7 @@ interface POSTPollResponse {
 export async function POSTPollVote(requestBody: VoteForm) {
   try {
     await fetchAPI<POSTPollResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/vote/`,
       "POST",
       "json",
       {
@@ -24,7 +24,7 @@ export async function POSTPollVote(requestBody: VoteForm) {
     );
     revalidatePath(`/poll/${requestBody.id}`);
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: POST /poll/vote/", error);
   }
 }
 
@@ -58,6 +58,6 @@ export async function GETVoteDetail(id: number) {
     );
     return response;
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: GET /poll/vote/detail", error);
   }
 }

@@ -6,7 +6,7 @@ import StepChips from "./_components/StepChip";
 
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
 import { useRouter } from "next/navigation";
-import { useFunnel } from "./_funnel/useFunnel";
+import { useFunnel } from "@/app/utils/funnel/useFunnel";
 import { GETCareerList, GETJobList } from "@/actions/static.action";
 import FunnelTitle from "./_components/FunnelTitle";
 import BottomFixedBottom from "@/components/common/BottomFixedBottom";

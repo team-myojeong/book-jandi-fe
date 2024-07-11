@@ -2,6 +2,7 @@
 
 import { POSTPollOpinion } from "@/actions/poll.action";
 import Button from "@/components/common/Button";
+import { revalidatePath } from "next/cache";
 import { useParams } from "next/navigation";
 
 import { useState } from "react";
@@ -17,6 +18,7 @@ export function OpinionInput() {
   const onClickUpload = async () => {
     const opinionBody = { id: +post_id, contents: opinion };
     await POSTPollOpinion(opinionBody);
+    setOpinion("");
   };
 
   const isDisabled = opinion.length === 0;

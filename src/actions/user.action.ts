@@ -13,7 +13,7 @@ interface POSTSignUpResponse {
 export async function POSTSignUp(requestBody: SignUpForm) {
   try {
     const result = await fetchAPI<POSTSignUpResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/signup`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/signup/`,
       "POST",
       "json",
       {
@@ -22,6 +22,6 @@ export async function POSTSignUp(requestBody: SignUpForm) {
     );
     return result.success;
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: POST /user/signup/", error);
   }
 }

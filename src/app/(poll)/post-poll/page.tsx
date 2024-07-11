@@ -6,8 +6,9 @@ import { Icon } from "@/components/common/Icon";
 import { HeaderWithSingleArrow } from "@/components/layout/Header";
 import SearchItem from "@/components/search/SearchItem";
 import { useBookStore } from "@/stores/book-store-provider";
+import { HtmlContext } from "next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
@@ -36,6 +37,12 @@ export default function Page() {
   const onClickQuestionButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     setPollForm({ ...pollForm, question: target.innerText });
+  };
+
+  const onChangeOpinitionTextarea = (e: { target: HTMLTextAreaElement }) => {
+    setPollForm((prev) => {
+      return { ...prev, description: e.target.value };
+    });
   };
 
   const onSubmitPoll = async () => {
@@ -178,6 +185,7 @@ export default function Page() {
           </div>
           <textarea
             className="w-full resize-none rounded-lg border border-grey-300 p-4 outline-none"
+            onChange={onChangeOpinitionTextarea}
             rows={5}
           />
         </div>

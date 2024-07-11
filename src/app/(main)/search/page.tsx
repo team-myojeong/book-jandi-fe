@@ -1,5 +1,4 @@
 "use client";
-import { GETBookByKeyword } from "@/app/actions/book.action";
 import SearchContents from "@/components/search/SearchContents";
 import SearchFooter from "@/components/search/SearchFooter";
 import SearchHeader from "@/components/search/SearchHeader";
@@ -39,10 +38,7 @@ export default function Search() {
   }, []);
   return (
     <>
-      <SearchHeader<BookSearchDTO>
-        placeholder="책 제목 검색"
-        getAPI={async (keyword) => await GETBookByKeyword(keyword)}
-      />
+      <SearchHeader<BookSearchDTO> placeholder="책 제목 검색" />
       <SearchContents />
       <SearchFooter />
     </>

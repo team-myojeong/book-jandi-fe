@@ -16,7 +16,6 @@ export default async function Page({
   const postId = params.post_id;
   const { poll, writer_info, vote, is_mine, is_bookmark } =
     await GETPollPost(postId);
-
   return (
     <>
       <Header id={postId} isBookmarked={is_bookmark} isMine={is_mine} />
@@ -24,11 +23,11 @@ export default async function Page({
       <Divider />
       <PollWriterSection writerInfo={writer_info} />
       <PollDetailSection poll={poll} />
-      {vote == "none" && <VoteSection />}
-      {vote !== "none" && (
+      {vote == "none" && !is_mine && <VoteSection />}
+      {(vote !== "none" || is_mine) && (
         <>
           <VoteResult id={postId} myVote={"green"} />
-          <OpinionSection postId={params.post_id} />
+          <OpinionSection isMine={is_mine} postId={params.post_id} />
         </>
       )}
     </>
