@@ -1,8 +1,10 @@
+"use server";
+
 export async function fetchAPI<T>(
   url: string,
   requestType: string = "GET",
   responseType: string = "json",
-  requestData?: any
+  requestData?: any,
 ): Promise<T> {
   try {
     const fetchOptions: RequestInit = {

@@ -3,19 +3,15 @@
 import { fetchAPI } from "@/apis/route";
 import { cookies } from "next/headers";
 
-interface ResponseType {
-  access_token: string;
-  signup_complete: boolean;
-}
+type TempResponse = { access_token: string; signup_complete: boolean };
 
 export async function login(code: string) {
   const param = new URLSearchParams({ code }).toString();
-  const response: ResponseType = await fetchAPI(
+  const response = await fetchAPI<TempResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/login?${param}`,
-    "POST",
+    "GET",
     "json",
   );
-  console.log("response", response);
   cookies().set({
     name: "access-token",
     value: response.access_token,
