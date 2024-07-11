@@ -1,6 +1,7 @@
 "use server";
 
 import { fetchAPI } from "@/apis/route";
+import { revalidatePath } from "next/cache";
 
 export interface PostForm {
   difficulty_level: 1 | 2 | 3;
@@ -23,7 +24,7 @@ interface POSTPollResponse {
 export async function POSTPollPost(requestBody: PostForm) {
   try {
     const result = await fetchAPI<POSTPollResponse>(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/`,
       "POST",
       "json",
       {
@@ -32,7 +33,7 @@ export async function POSTPollPost(requestBody: PostForm) {
     );
     return result.id;
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: POST /poll/", error);
   }
 }
 
@@ -44,15 +45,16 @@ interface OpinionForm {
 export async function POSTPollOpinion(requestBody: OpinionForm) {
   try {
     await fetchAPI(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/opinion`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/poll/opinion/`,
       "POST",
       "json",
       {
         ...requestBody,
       },
     );
+    revalidatePath(`/poll/${requestBody.id}`);
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: POST /poll/opinion/", error);
   }
 }
 
@@ -80,6 +82,6 @@ export async function GETPollOpinion(id: number) {
     );
     return result;
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: GET /poll/opinion", error);
   }
 }

@@ -37,7 +37,7 @@ async function GETPollList() {
       };
     });
   } catch (error) {
-    console.error("Fail to fetch data: ", error);
+    console.error("Fail to fetch data: GET /poll/popular", error);
   }
 }
 

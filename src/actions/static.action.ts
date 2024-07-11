@@ -17,7 +17,7 @@ export async function GETJobList() {
       return { jobId: ele.job_id, jobText: ele.job_text, isSelected: false };
     });
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: GET /user/job", error);
   }
 }
 
@@ -40,6 +40,6 @@ export async function GETCareerList() {
       };
     });
   } catch (error) {
-    console.error("Fail to fetch data:", error);
+    console.error("Fail to fetch data: GET /user/career", error);
   }
 }
